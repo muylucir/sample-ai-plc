@@ -28,7 +28,7 @@ X) Other (please describe after [Answer]: tag below)
 2. **Parse current status** from the state file to populate the prompt. Resume from **Current Stage**; if it is missing, use the first `[ ]` stage that belongs to the recorded path. If **Current Stage** is `Discovery Complete` or `Ended`, there is nothing to continue: offer review, or reopening a stage (option C) through "Reopening After Discovery Has Ended" in `common/workflow-changes.md`
 3. **MANDATORY: Load Previous Stage Artifacts** - Before resuming any stage, automatically read all relevant artifacts from previous stages that exist in the workspace:
    - **All stages**: `discovery/discovery-document.md` (parts completed so far)
-   - **Envision**: `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode)
+   - **Envision**: `discovery/envision/business-context.md`, `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode)
    - **Solution Analysis**: `discovery/solution-analysis/identified-solutions.md`
    - **Use Case Intake**: `discovery/use-case-intake/use-cases.md`
    - **Use Case Prioritization**: `discovery/prioritization/scoring.md`, `discovery/prioritization/ranking.md`

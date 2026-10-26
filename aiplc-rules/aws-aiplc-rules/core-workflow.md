@@ -331,6 +331,7 @@ aiplc-docs/
 │   ├── discovery-document.md          # Main output (all paths)
 │   ├── envision/                      # Path A
 │   │   ├── business-context-questions.md
+│   │   ├── business-context.md
 │   │   ├── mode-selection-questions.md
 │   │   ├── pain-point-questions.md    # Interactive / hybrid mode
 │   │   ├── pain-points-from-url.md    # URL / hybrid mode
@@ -420,7 +421,7 @@ _Not yet completed_
 
 | Stage | Runs in | Requires | Produces | Writes Part |
 |---|---|---|---|---|
-| Envision | Path A | — | `envision/pain-point-analysis.md` | 1 (pain points, PR/FAQ) |
+| Envision | Path A | — | `envision/business-context.md`, `envision/pain-point-analysis.md` | 1 (business context, pain points, PR/FAQ) |
 | Solution Analysis | Path A | Part 1 (PR/FAQ) | `solution-analysis/identified-solutions.md` | 2 (identified solutions) |
 | Use Case Intake | Path B, A.2 | — (A.2: `identified-solutions.md`) | `use-case-intake/use-cases.md` | 1 (Path B: use case summary) |
 | Use Case Prioritization | Path B, A.2 | `use-cases.md` | `prioritization/*.md` | 2 (ranking, selection) |

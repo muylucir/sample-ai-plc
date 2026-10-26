@@ -18,7 +18,7 @@ Envision is **not** required — Path B and Entry Point 1 reach this stage witho
 
 Load whichever of these exist (all paths relative to `aiplc-docs/discovery/`):
 - `discovery-document.md` (Parts 1-3)
-- `envision/pain-point-analysis.md` — Path A
+- `envision/business-context.md` and `envision/pain-point-analysis.md` — Path A
 - `use-case-intake/use-cases.md` and `prioritization/scoring.md` — Path A.2, Path B
 - `prototypes/{selected-slug}/PROTOTYPE-{selected-slug}.md` and `iteration-log.md` — Entry Point 1, Path A.2, Path B
 - `prototypes/{solution-slug}/validation-results.md` — Path A.1
