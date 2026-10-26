@@ -24,6 +24,10 @@ Rule details location: `./aws-aiplc-rule-details/`
 - Load `common/question-format-guide.md` for question formatting rules
 - Reference these throughout the workflow execution
 
+**On-demand Rules**: Load only when the situation arises:
+- Load `common/error-handling.md` when an error occurs or artifacts are missing/inconsistent
+- Load `common/workflow-changes.md` when the user asks to skip, add, redo, or pause a stage
+
 ## MANDATORY: Content Validation
 **CRITICAL**: Before creating ANY file, you MUST validate content according to `common/content-validation.md` rules:
 - Validate Mermaid diagram syntax
@@ -68,14 +72,15 @@ The Discovery Phase has **THREE ENTRY POINTS**:
 1. **MANDATORY**: Log initial user request in audit.md with complete raw input
 2. Load all steps from `inception/workspace-detection.md`
 3. Execute workspace detection:
-   - **PRIORITY CHECK**: Check for existing PROTOTYPE-*.md files (Entry Point 1)
+   - **FIRST**: Check for existing `aiplc-docs/aiplc-state.md` — if found, resume the recorded stage (see `common/session-continuity.md`)
+   - **THEN**: Check for existing PROTOTYPE-*.md files (Entry Point 1)
      - Path: `aiplc-docs/discovery/prototypes/*/PROTOTYPE-*.md`
      - If found: Skip all discovery, jump to Prototype Building
-   - Check for existing aiplc-state.md (resume if found)
-   - Check for existing Discovery artifacts
-4. Determine next phase:
+   - Check for Discovery artifacts without a state file (rebuild state, then resume)
+4. Determine next stage:
+   - If resuming: The recorded stage
    - If PROTOTYPE-*.md found: Prototype Building (Entry Point 1)
-   - If no PROTOTYPE-*.md: Discovery Mode Selection (Entry Point 2 or 3)
+   - Otherwise: Discovery Mode Selection (Entry Point 2 or 3)
 5. **MANDATORY**: Log findings in audit.md
 6. Present completion message to user
 7. Automatically proceed to next phase

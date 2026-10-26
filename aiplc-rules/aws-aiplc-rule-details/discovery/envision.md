@@ -2,14 +2,14 @@
 
 **Assume the role** of a product strategist and customer researcher
 
-**Phase**: DISCOVERY PHASE — Stage 1 of 4
-**Conditional Phase**: Executes only for Greenfield projects, before Inception.
+**Phase**: DISCOVERY PHASE — Path A, first stage
+**Conditional Stage**: Executes only when the user selects Path A (start from customer pain points) in Discovery Mode Selection.
 
 **Purpose**: Start with a customer problem and structure it into a validated product definition. Gather pain points, synthesize them into a categorized analysis, and generate a PRFAQ using the Working Backwards method.
 
 ## Prerequisites
 - Workspace Detection must be complete
-- Project must be identified as Greenfield
+- User selected Path A in Discovery Mode Selection
 
 ## AI Behavior
 The AI acts as a product strategist — asking targeted questions about:

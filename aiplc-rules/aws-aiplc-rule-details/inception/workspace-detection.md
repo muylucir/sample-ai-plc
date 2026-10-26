@@ -1,10 +1,19 @@
 # Workspace Detection
 
-**Purpose**: Determine workspace state and check for existing AI-PLC projects
+**Purpose**: Determine whether this is a new Discovery workflow, a resumed one, or a build from existing PROTOTYPE-*.md files.
 
-## Step 0: Check for Existing PROTOTYPE-*.md Files (PRIORITY CHECK)
+This workspace runs the Discovery phase only. Do NOT scan for application source code, do NOT classify the workspace as greenfield or brownfield, and do NOT route to any Inception, Construction, or Operations stage — those run in a separate developer workspace.
 
-**BEFORE any other checks**, scan for existing prototype specification files:
+## Step 1: Check for an Existing AI-PLC Session (FIRST)
+
+Check if `aiplc-docs/aiplc-state.md` exists.
+
+- **If it exists**: This is a resumed session. Follow `common/session-continuity.md` and resume from the recorded stage. **STOP HERE** — do not run Steps 2-5. (PROTOTYPE-*.md files generated earlier in this same session must not restart the workflow at Prototype Building.)
+- **If it does not exist**: Continue to Step 2.
+
+## Step 2: Check for Existing PROTOTYPE-*.md Files (Entry Point 1)
+
+Scan for prototype specification files:
 
 **Path pattern**: `aiplc-docs/discovery/prototypes/*/PROTOTYPE-*.md`
 
@@ -31,66 +40,32 @@ I'll skip the discovery phase and build prototypes directly from
 these specifications.
 ```
 
-4. **SKIP ALL DISCOVERY PHASES**:
+4. **SKIP ALL DISCOVERY STAGES BEFORE PROTOTYPE BUILDING**:
    - Skip pain point analysis
    - Skip PR/FAQ generation
    - Skip use case intake
    - Skip prioritization
    - Skip context generation
 
-5. **JUMP DIRECTLY TO**: Prototype Building stage (see `discovery/prototype-building.md`)
+5. Create the state file (Step 4) with **Entry Point** set to `Entry Point 1`.
 
-6. After prototypes built, continue to Product Strategy → GTM
+6. **JUMP DIRECTLY TO**: Prototype Building stage (see `discovery/prototype-building.md`)
 
-**STOP HERE** - Do not proceed with Steps 1-6 below if PROTOTYPE-*.md files found.
-
----
+7. After prototypes built, continue to Product Strategy → GTM
 
 ### IF NO PROTOTYPE-*.md files found:
 
-Continue with normal workspace detection (Steps 1-6 below).
+Continue to Step 3.
 
----
+## Step 3: Check for Orphaned Discovery Artifacts
 
-## Step 1: Check for Existing AI-PLC Project
+If `aiplc-docs/discovery/` contains artifacts but `aiplc-state.md` does not exist (state file deleted or never written):
 
-Check if `aiplc-docs/aiplc-state.md` exists:
-- **If exists**: Resume from last phase (load context from previous phases)
-- **If not exists**: Continue with new project assessment
+1. List the artifacts found
+2. Follow "Corrupted State File" in `common/error-handling.md` to rebuild the state file from the artifacts
+3. Resume from the first stage whose artifacts are missing
 
-## Step 2: Scan Workspace for Existing Code
-
-**Determine if workspace has existing code:**
-- Scan workspace for source code files (.java, .py, .js, .ts, .jsx, .tsx, .kt, .kts, .scala, .groovy, .go, .rs, .rb, .php, .c, .h, .cpp, .hpp, .cc, .cs, .fs, etc.)
-- Check for build files (pom.xml, package.json, build.gradle, etc.)
-- Look for project structure indicators
-- Identify workspace root directory (NOT aiplc-docs/)
-
-**Record findings:**
-```markdown
-## Workspace State
-- **Existing Code**: [Yes/No]
-- **Programming Languages**: [List if found]
-- **Build System**: [Maven/Gradle/npm/etc. if found]
-- **Project Structure**: [Monolith/Microservices/Library/Empty]
-- **Workspace Root**: [Absolute path]
-```
-
-## Step 3: Determine Next Phase
-
-**IF workspace is empty (no existing code)**:
-- Set flag: `brownfield = false`
-- Check for existing Discovery artifacts in `aiplc-docs/discovery/`
-- **IF Discovery artifacts exist**: Load them, skip to Requirements Analysis
-- **IF no Discovery artifacts**: Next phase is DISCOVERY PHASE
-  - Present Discovery Mode Selection (see `discovery/discovery-mode-selection.md`)
-  - User chooses: [A] Pain points → PR/FAQ OR [B] Use cases
-
-**IF workspace has existing code**:
-- Set flag: `brownfield = true`
-- Check for existing reverse engineering artifacts in `aiplc-docs/inception/reverse-engineering/`
-- **IF reverse engineering artifacts exist**: Load them, skip to Requirements Analysis
-- **IF no reverse engineering artifacts**: Next phase is Reverse Engineering
+If `aiplc-docs/discovery/` is empty or does not exist, this is a new Discovery workflow.
 
 ## Step 4: Create Initial State File
 
@@ -99,20 +74,10 @@ Create `aiplc-docs/aiplc-state.md`:
 ```markdown
 # AI-PLC State Tracking
 
-## Project Information
-- **Project Type**: [Greenfield/Brownfield]
+## Session Information
 - **Start Date**: [ISO timestamp]
-- **Current Stage**: INCEPTION - Workspace Detection
-
-## Workspace State
-- **Existing Code**: [Yes/No]
-- **Reverse Engineering Needed**: [Yes/No]
-- **Workspace Root**: [Absolute path]
-
-## Code Location Rules
-- **Application Code**: Workspace root (NEVER in aiplc-docs/)
-- **Documentation**: aiplc-docs/ only
-- **Structure patterns**: See code-generation.md Critical Rules
+- **Entry Point**: [Entry Point 1 / To be selected]
+- **Current Stage**: Workspace Detection
 
 ## Stage Progress
 [Will be populated as workflow progresses]
@@ -120,29 +85,20 @@ Create `aiplc-docs/aiplc-state.md`:
 
 ## Step 5: Present Completion Message
 
-**For Brownfield Projects:**
+**For Entry Point 1** (PROTOTYPE-*.md found): use the message in Step 2.
+
+**For a new Discovery workflow:**
 ```markdown
 # 🔍 Workspace Detection Complete
 
-Workspace analysis findings:
-• **Project Type**: Brownfield project
-• [AI-generated summary of workspace findings in bullet points]
-• **Next Step**: Proceeding to **Reverse Engineering** to analyze existing codebase...
-```
-
-**For Greenfield Projects:**
-```markdown
-# 🔍 Workspace Detection Complete
-
-Workspace analysis findings:
-• **Project Type**: Greenfield project
+• **No existing AI-PLC session found** — starting a new Discovery workflow
 • **Next Step**: Proceeding to **Discovery Mode Selection** to determine how to start (pain points or use cases)...
 ```
 
 ## Step 6: Automatically Proceed
 
 - **No user approval required** - this is informational only
-- Automatically proceed to next phase:
-  - **If PROTOTYPE-*.md found**: Prototype Building (Entry Point 1)
-  - **Brownfield**: Reverse Engineering (if no existing artifacts) or Requirements Analysis (if artifacts exist)
-  - **Greenfield**: Discovery Mode Selection → User chooses Path A (Envision) or Path B (Use Case Intake)
+- Automatically proceed to next stage:
+  - **Resumed session**: The recorded stage (see `common/session-continuity.md`)
+  - **PROTOTYPE-*.md found**: Prototype Building (Entry Point 1)
+  - **New workflow**: Discovery Mode Selection → User chooses Path A (Envision) or Path B (Use Case Intake)

@@ -3,8 +3,7 @@
 **Assume the role** of a prototype strategist and validation analyst
 
 **Phase**: DISCOVERY PHASE — Path A.1 (Single Solution from PR/FAQ)
-**Conditional Phase**: Executes only when:
-- Greenfield project
+**Conditional Stage**: Executes only when:
 - Path A selected (Pain points)
 - Envision complete
 - Solution Analysis identifies SINGLE solution
@@ -64,7 +63,7 @@ The AI derives the prototype scope from the Envision artifacts — not from a bl
 ### Out of Scope for Prototype
 | Feature | Reason | Deferred To |
 |---|---|---|
-| [Feature X] | Too complex for validation | Inception |
+| [Feature X] | Too complex for validation | Developer handoff |
 | [Feature Y] | Not needed to test core hypothesis | Post-launch |
 
 ## Validation Hypothesis
@@ -241,11 +240,9 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 
 **Instruct the AI agent to build the prototype from this file.**
 
-The AI agent reads `build-instructions.md` and generates the application code in the workspace, following the same code generation patterns used in the Construction phase but with relaxed quality constraints:
+The AI agent reads `build-instructions.md` and generates the application code in the workspace with prototype-level quality constraints:
 
-- Skip detailed functional design
-- Skip NFR requirements and design
-- Skip infrastructure design
+- No detailed functional, non-functional, or infrastructure design — that happens in the developer workspace
 - Minimal test coverage (happy path only)
 - No security hardening
 - No performance optimization
@@ -431,7 +428,7 @@ When the user returns with feedback, synthesize it and create `aiplc-docs/discov
 ## Unmet Needs Discovered
 | Need | Frequency | Recommended Action |
 |---|---|---|
-| [Need 1] | [X users mentioned] | [Add to Inception / Defer to post-launch / Ignore] |
+| [Need 1] | [X users mentioned] | [Add to developer handoff / Defer to post-launch / Ignore] |
 
 ## Design Feedback
 | Feedback | Frequency | Action Taken |
@@ -534,7 +531,7 @@ Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
 
 ## Build Decision: [PROCEED / ITERATE / PIVOT / KILL]
 - **Rationale**: [AI-synthesized rationale + PM decision]
-- **Recommendations for Inception**: [Features to add, modify, or remove based on validation]
+- **Recommendations for Developer Handoff**: [Features to add, modify, or remove based on validation]
 ```
 
 Update the document status header:

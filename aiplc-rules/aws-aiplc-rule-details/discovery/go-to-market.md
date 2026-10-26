@@ -2,10 +2,9 @@
 
 **Assume the role** of a go-to-market strategist
 
-**Phase**: DISCOVERY PHASE — Stage 4 of 4
-**Conditional Phase**: Executes only for Greenfield projects, after Product Strategy.
+**Phase**: DISCOVERY PHASE — final stage (all paths), after Product Strategy
 
-**Purpose**: Cover marketing, sales, and launch planning before Construction begins. This is the final stage of Discovery — completing the single living document that Inception consumes as input context.
+**Purpose**: Cover marketing, sales, and launch planning. This is the final stage of Discovery — completing the single living document that developers use as input context in their own workspace.
 
 ## Prerequisites
 - Envision stage must be complete and approved
@@ -151,13 +150,13 @@ All stages of Discovery are now complete.
 - `aiplc-docs/discovery/go-to-market/` — Go-to-Market working files
 
 ## Next Step
-The Discovery Document will be consumed by the **Inception Phase** as input context. Proceeding to **Workspace Detection** → **Requirements Analysis**.
+Discovery is complete in this workspace. Hand off the `aiplc-docs/discovery/` directory — especially `discovery-document.md` — to developers, who use it as input context in their own workspace (for example, the Inception phase of AI-DLC).
 
-**Please review the complete Discovery Document and confirm to proceed to Inception.**
+**Please review the complete Discovery Document and confirm it is ready for handoff.**
 ```
 
 ### ⛔ GATE: Await User Approval
-DO NOT proceed to Inception Phase until the user explicitly approves the complete Discovery Document.
+DO NOT mark Discovery complete until the user explicitly approves the complete Discovery Document.
 
 ### Step 5: Update State Tracking
 
@@ -170,12 +169,9 @@ Update `aiplc-docs/aiplc-state.md`:
 - [x] Prototype & Validation (or skipped)
 - [x] Product Strategy
 - [x] Go-to-Market
-
-### 🔵 INCEPTION PHASE
-- [ ] Workspace Detection
 ```
 
-### Step 6: Log and Proceed
+### Step 6: Log and End
 
 - Log completion in `aiplc-docs/audit.md`
-- Proceed to Inception Phase (Workspace Detection)
+- End the workflow. Do NOT start Inception, Construction, or Operations stages in this workspace.

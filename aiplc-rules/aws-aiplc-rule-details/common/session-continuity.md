@@ -4,11 +4,11 @@
 When a user returns to continue work on an existing AI-PLC project, present this prompt:
 
 ```markdown
-**Welcome back! I can see you have an existing AI-PLC project in progress.**
+**Welcome back! I can see you have an existing AI-PLC Discovery session in progress.**
 
 Based on your aiplc-state.md, here's your current status:
-- **Project**: [project-name]
-- **Current Phase**: [INCEPTION/CONSTRUCTION/OPERATIONS]
+- **Product / Use Case**: [product or selected use case name]
+- **Entry Point / Path**: [Entry Point 1 / Path A.1 / Path A.2 / Path B]
 - **Current Stage**: [Stage Name]
 - **Last Completed**: [Last completed step]
 - **Next Step**: [Next step to work on]
@@ -23,29 +23,23 @@ B) Review a previous stage ([Show available stages])
 
 ## MANDATORY: Session Continuity Instructions
 1. **Always read aiplc-state.md first** when detecting existing project
-2. **Parse current status** from the workflow file to populate the prompt
-3. **MANDATORY: Load Previous Stage Artifacts** - Before resuming any stage, automatically read all relevant artifacts from previous stages:
-   - **Reverse Engineering**: Read architecture.md, code-structure.md, api-documentation.md
-   - **Discovery - Envision**: Read discovery-document.md (Part 1), pain-point-analysis.md, pain-points-from-url.md
-   - **Discovery - Prototype & Validation**: Read prototype-spec.md, design-context.md, build-instructions.md, iteration-log.md, validation-plan.md, validation-results.md
-   - **Discovery - Product Strategy**: Read discovery-document.md (Part 2), strategy-questions.md
-   - **Discovery - Go-to-Market**: Read discovery-document.md (Part 3), gtm-questions.md
-   - **Requirements Analysis**: Read requirements.md, requirement-verification-questions.md
-   - **User Stories**: Read stories.md, personas.md, story-generation-plan.md
-   - **Application Design**: Read application-design artifacts (components.md, component-methods.md, services.md)
-   - **Design (Units)**: Read unit-of-work.md, unit-of-work-dependency.md, unit-of-work-story-map.md
-   - **Per-Unit Design**: Read functional-design.md, nfr-requirements.md, nfr-design.md, infrastructure-design.md
-   - **Code Stages**: Read all code files, plans, AND all previous artifacts
-4. **Smart Context Loading by Stage**:
-   - **Early Stages (Workspace Detection, Reverse Engineering)**: Load workspace analysis
-   - **Requirements/Stories**: Load reverse engineering + requirements artifacts
-   - **Design Stages**: Load requirements + stories + architecture + design artifacts
-   - **Code Stages**: Load ALL artifacts + existing code files
-5. **Adapt options** based on architectural choice and current phase
+2. **Parse current status** from the state file to populate the prompt
+3. **MANDATORY: Load Previous Stage Artifacts** - Before resuming any stage, automatically read all relevant artifacts from previous stages that exist in the workspace:
+   - **Envision**: `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode), `discovery/discovery-document.md` (Part 1)
+   - **Solution Analysis**: `discovery/solution-analysis/identified-solutions.md`
+   - **Use Case Intake**: `discovery/use-case-intake/use-cases.md`
+   - **Use Case Prioritization**: `discovery/prioritization/scoring.md`, `discovery/prioritization/ranking.md`
+   - **Prototype Context Generation / Prototype Building**: `discovery/prototypes/*/PROTOTYPE-*.md`, `design-context.md`, `iteration-log.md`
+   - **Prototype & Validation**: `discovery/prototype/prototype-spec.md`, `design-context.md`, `build-instructions.md`, `iteration-log.md`, `validation-plan.md`, `validation-results.md`
+   - **Product Strategy**: `discovery/discovery-document.md`, `discovery/product-strategy/strategy-questions.md`
+   - **Go-to-Market**: `discovery/discovery-document.md`, `discovery/go-to-market/gtm-questions.md`
+   - All paths above are relative to `aiplc-docs/`
+4. **Load only what the current stage needs**: Earlier-stage artifacts that feed the current stage, plus the current stage's own working files. Do not load prototype source code unless resuming Prototype Building or iteration.
+5. **Adapt options** based on the recorded path and stage
 6. **Show specific next steps** rather than generic descriptions
 7. **Log the continuity prompt** in audit.md with timestamp
 8. **Context Summary**: After loading artifacts, provide brief summary of what was loaded for user awareness
 9. **Asking questions**: ALWAYS ask clarification or user feedback questions by placing them in .md files. DO NOT place the multiple-choice questions in-line in the chat session.
 
 ## Error Handling
-If artifacts are missing or corrupted during session resumption, see [error-handling.md](error-handling.md) for guidance on recovery procedures. 
+If artifacts are missing or corrupted during session resumption, see [error-handling.md](error-handling.md) for guidance on recovery procedures.

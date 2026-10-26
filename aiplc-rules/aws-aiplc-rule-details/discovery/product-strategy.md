@@ -2,8 +2,7 @@
 
 **Assume the role** of a product strategy advisor
 
-**Phase**: DISCOVERY PHASE — Stage 3 of 4
-**Conditional Phase**: Executes only for Greenfield projects, after Envision (and optionally after Prototype & Validation).
+**Phase**: DISCOVERY PHASE — after a solution or use case has been selected (all paths)
 
 **Purpose**: Capture positioning, differentiation, and business model decisions. These are informed by the structured discovery work — validated pain points, market research, a PRFAQ that has been through stakeholder review, and optionally validated prototype feedback from real users — rather than assumptions.
 
