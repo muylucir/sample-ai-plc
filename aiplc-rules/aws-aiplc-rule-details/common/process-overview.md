@@ -15,7 +15,7 @@
 • **Workspace Detection** (always) → **Check for PROTOTYPE-*.md** (priority) → **DISCOVERY PHASE** (3 entry points) → **Product Strategy** → **Go-to-Market** → **Discovery Document Complete**
 
 ## Discovery Phase Entry Points:
-• **Entry Point 1 (Highest Priority)**: PROTOTYPE-*.md files exist → Skip all discovery → Build prototypes directly
+• **Entry Point 1 (Highest Priority)**: PROTOTYPE-*.md files exist → Confirm they come from your team → Skip all discovery → Build prototypes directly
 • **Entry Point 2 (Path A)**: No PROTOTYPE-*.md → User chooses pain points → Envision → Solution Analysis → Single or Multiple solutions
 • **Entry Point 3 (Path B)**: No PROTOTYPE-*.md → User chooses use cases → Use Case Intake → Prioritization → Prototype Context Generation
 
@@ -26,8 +26,8 @@
 • **Handoff**: Developers use Discovery Document in their workspace for Inception, Construction, and Operations phases
 
 ## Your Role as Product Manager:
-• **Answer questions** in dedicated question files using [Answer]: tags with letter choices (A, B, C, D, E)
-• **Option E available**: Choose "Other" and describe your custom response if provided options don't match
+• **Answer questions** in dedicated question files using [Answer]: tags — a letter for multiple-choice questions, text for open questions
+• **Option X available**: Choose "Other" and describe your custom response if provided options don't match
 • **Review and approve** each Discovery stage before proceeding
 • **Make product decisions** on strategy, positioning, and go-to-market
 • **Important**: Focus on product vision - technical implementation happens in developer workspace
@@ -68,7 +68,7 @@ flowchart TD
     
     ENV --> SOL
     SOL -->|Single Solution| PV
-    SOL -->|Multiple Solutions| UCP
+    SOL -->|Multiple Solutions| UCI
     
     UCI --> UCP
     UCP --> PCG
@@ -108,6 +108,7 @@ flowchart TD
 
 #### Entry Point 1: Existing PROTOTYPE-*.md Files (Highest Priority)
 - Workspace Detection finds PROTOTYPE-*.md files in workspace
+- User confirms the files come from them or their team
 - Skip all discovery phases (pain points, PR/FAQ, use case intake, prioritization)
 - Jump directly to Prototype Building
 - Typical scenario: Workshop environment where teams receive pre-generated specifications
@@ -117,7 +118,7 @@ flowchart TD
 - Envision: Gather customer pain points, generate PR/FAQ using Working Backwards
 - Solution Analysis: Determine single solution or multiple solutions
   - Single solution → Prototype & Validation (existing flow)
-  - Multiple solutions → Use Case Prioritization → Prototype Context Generation
+  - Multiple solutions → Use Case Intake (pre-filled) → Use Case Prioritization → Prototype Context Generation
 - Product Strategy: Positioning, differentiation, business model
 - Go-to-Market: Marketing strategy, sales approach, launch planning
 

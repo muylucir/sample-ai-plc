@@ -2,32 +2,27 @@
 
 **Assume the role** of a go-to-market strategist
 
-**Phase**: DISCOVERY PHASE — Stage 4 of 4
-**Conditional Phase**: Executes only for Greenfield projects, after Product Strategy.
+**Phase**: DISCOVERY PHASE — final stage (all paths), after Product Strategy
 
-**Purpose**: Cover marketing, sales, and launch planning before Construction begins. This is the final stage of Discovery — completing the single living document that Inception consumes as input context.
+**Purpose**: Cover marketing, sales, and launch planning. This is the final stage of Discovery — completing the single living document that developers use as input context in their own workspace.
 
 ## Prerequisites
-- Envision stage must be complete and approved
 - Product Strategy stage must be complete and approved
-- `aiplc-docs/discovery/discovery-document.md` must exist with prior parts populated (Envision, optionally Prototype & Validation, Product Strategy)
+- `aiplc-docs/discovery/discovery-document.md` must exist with Part 4 (Product Strategy) populated
 
 ## Execution Steps
 
 ### Step 1: Load Prior Discovery Context
 
-Load the following artifacts:
-- `aiplc-docs/discovery/discovery-document.md` (All prior parts: Envision, Prototype & Validation if executed, Product Strategy)
-- `aiplc-docs/discovery/envision/pain-point-analysis.md` (categorized pain points)
-- `aiplc-docs/discovery/prototype/validation-results.md` (if Prototype & Validation was executed)
+Load `aiplc-docs/discovery/discovery-document.md` (Parts 1-4) and the same path-dependent artifacts listed in Step 1 of `product-strategy.md` (whichever exist).
 
-Use these to inform all Go-to-Market decisions. Every recommendation should be grounded in the validated pain points, PRFAQ, prototype feedback (if available), and product strategy — not assumptions.
+Use these to inform all Go-to-Market decisions. Every recommendation should be grounded in the evidence that exists and the product strategy — not assumptions. Where Part 4 flags assumptions not backed by customer research, carry that flag into GTM.
 
 ### Step 2: Gather Go-to-Market Inputs
 
 Create `aiplc-docs/discovery/go-to-market/gtm-questions.md` with questions covering the areas below.
 
-**CRITICAL — Intelligent Defaults**: Every question MUST include an intelligent default as Option A, drawn from the Envision and Product Strategy context. The PM confirms or overrides rather than writing from scratch.
+**CRITICAL — Intelligent Defaults**: Every question MUST include an intelligent default as Option A, drawn from the Discovery context loaded in Step 1. The PM confirms or overrides rather than writing from scratch.
 
 **MANDATORY question areas:**
 
@@ -75,12 +70,10 @@ DO NOT proceed until all GTM questions are answered and validated.
 
 ### Step 3: Write Go-to-Market to Living Document
 
-Append Part 3 to `aiplc-docs/discovery/discovery-document.md`:
+Write **Part 5: Go-to-Market** in `aiplc-docs/discovery/discovery-document.md`:
 
 ```markdown
----
-
-# Part 3: Go-to-Market
+# Part 5: Go-to-Market
 
 ## Marketing Strategy
 - **Primary Channel**: [Channel]
@@ -121,10 +114,7 @@ Append Part 3 to `aiplc-docs/discovery/discovery-document.md`:
 - **Kill Criteria**: [Conditions to pivot or stop]
 ```
 
-Update the document status header:
-```markdown
-**Status**: Complete — Envision, [Prototype & Validation], Product Strategy, Go-to-Market
-```
+Update the document status header to `**Status**: In Progress — Go-to-Market`.
 
 ### Step 4: Present Discovery Phase Completion
 
@@ -136,46 +126,34 @@ All stages of Discovery are now complete.
 ## Discovery Document Summary
 - **Product**: [Product name]
 - **Target Customer**: [Segment]
-- **Primary Pain Point**: [Top pain point]
-- **Prototype**: [Validated with X users / Skipped]
+- **Primary Pain Point**: [Top pain point, or "Not researched in this path"]
+- **Prototype**: [Validated with X users / Built, not validated / Skipped]
 - **Revenue Model**: [Model]
 - **Launch Strategy**: [Strategy]
 - **Target Launch Date**: [Date]
 
 ## Artifacts
 - `aiplc-docs/discovery/discovery-document.md` — Complete living document (all parts)
-- `aiplc-docs/discovery/envision/pain-point-analysis.md` — Categorized pain point analysis
-- `aiplc-docs/discovery/envision/` — Envision working files
-- `aiplc-docs/discovery/prototype/` — Prototype & Validation working files (if executed)
+- `aiplc-docs/discovery/envision/` — Envision working files (Path A)
+- `aiplc-docs/discovery/use-case-intake/`, `prioritization/` — Use case working files (Path A.2, Path B)
+- `aiplc-docs/discovery/prototypes/` — PROTOTYPE-*.md files and prototype working files
 - `aiplc-docs/discovery/product-strategy/` — Product Strategy working files
 - `aiplc-docs/discovery/go-to-market/` — Go-to-Market working files
 
 ## Next Step
-The Discovery Document will be consumed by the **Inception Phase** as input context. Proceeding to **Workspace Detection** → **Requirements Analysis**.
+Discovery is complete in this workspace. Hand off the `aiplc-docs/discovery/` directory — especially `discovery-document.md` — to developers, who use it as input context in their own workspace (for example, the Inception phase of AI-DLC).
 
-**Please review the complete Discovery Document and confirm to proceed to Inception.**
+**Please review the complete Discovery Document and confirm it is ready for handoff.**
 ```
 
 ### ⛔ GATE: Await User Approval
-DO NOT proceed to Inception Phase until the user explicitly approves the complete Discovery Document.
+DO NOT mark Discovery complete until the user explicitly approves the complete Discovery Document.
 
 ### Step 5: Update State Tracking
 
-Update `aiplc-docs/aiplc-state.md`:
+After approval, mark `Go-to-Market` as `[x]` in `aiplc-docs/aiplc-state.md`, then run "End of Discovery" in Artifact Contract (core-workflow.md): it marks the document `Complete`, marks unexecuted parts and stages, and sets **Current Stage** to `Discovery Complete`.
 
-```markdown
-## Stage Progress
-### 🟣 DISCOVERY PHASE
-- [x] Envision
-- [x] Prototype & Validation (or skipped)
-- [x] Product Strategy
-- [x] Go-to-Market
-
-### 🔵 INCEPTION PHASE
-- [ ] Workspace Detection
-```
-
-### Step 6: Log and Proceed
+### Step 6: Log and End
 
 - Log completion in `aiplc-docs/audit.md`
-- Proceed to Inception Phase (Workspace Detection)
+- End the workflow. Do NOT start Inception, Construction, or Operations stages in this workspace.

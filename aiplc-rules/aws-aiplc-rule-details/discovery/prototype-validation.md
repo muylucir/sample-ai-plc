@@ -3,37 +3,45 @@
 **Assume the role** of a prototype strategist and validation analyst
 
 **Phase**: DISCOVERY PHASE — Path A.1 (Single Solution from PR/FAQ)
-**Conditional Phase**: Executes only when:
-- Greenfield project
+**Conditional Stage**: Executes only when:
 - Path A selected (Pain points)
 - Envision complete
 - Solution Analysis identifies SINGLE solution
 - User wants to validate with prototype
 
 **Note**: This is the ORIGINAL single-prototype flow. For multiple solutions or use case prioritization, see:
-- Path A.2: Multiple solutions → `solution-analysis.md` → `use-case-prioritization.md`
+- Path A.2: Multiple solutions → `solution-analysis.md` → `use-case-intake.md` (pre-filled) → `use-case-prioritization.md`
 - Path B: Use cases → `use-case-intake.md` → `use-case-prioritization.md`
 - Entry Point 1: Existing PROTOTYPE-*.md → `prototype-building.md`
 
 **Purpose**: Translate validated scope into a prototype specification, capture design context, guide the AI agent through building a working prototype, structure user validation, synthesize feedback against original pain points, and make a build decision.
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/prototypes/{solution-slug}/prototype-questions.md` for the spec approval, build, iteration, and build decision questions; the design-context and validation-plan files below hold their own questions, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Prerequisites
 - Envision stage must be complete and approved
-- `aiplc-docs/discovery/discovery-document.md` must exist with Part 1 (Envision) populated
+- `aiplc-docs/discovery/discovery-document.md` must exist with Part 1 (Problem & Opportunity) populated
 - `aiplc-docs/discovery/envision/pain-point-analysis.md` must exist
+- A single solution selected in Solution Analysis (recorded in `aiplc-state.md`)
+
+`{solution-slug}` is the kebab-case name of the selected solution (same slug rules as `prototype-context-generation.md`).
 
 ## AI Behavior
 The AI acts as a prototype strategist — translating Envision artifacts into a buildable spec, guiding design decisions, structuring validation, and synthesizing feedback. The AI does NOT ask the PM to write code or make technical decisions. The PM makes product decisions; the AI handles everything else.
+
+**MANDATORY AUDIT**: Log to `aiplc-docs/audit.md` (see "Audit Logging" in core-workflow.md) at every gate in this stage and at each of these build events: build configuration confirmed; credentials checked (configured: yes/no — never values); model ID verified; build started; build finished (run command, test result); each iteration; validation feedback received; build decision. The build is the longest part of this stage — do not skip logging while building.
 
 ## Execution Steps
 
 ### Step 1: Generate Prototype Specification
 
 Load Envision context:
-- `aiplc-docs/discovery/discovery-document.md` (Part 1: Envision)
+- `aiplc-docs/discovery/discovery-document.md` (Parts 1 and 2)
 - `aiplc-docs/discovery/envision/pain-point-analysis.md`
+- `aiplc-docs/discovery/solution-analysis/identified-solutions.md`
 
-The AI derives the prototype scope from the Envision artifacts — not from a blank prompt. Create `aiplc-docs/discovery/prototype/prototype-spec.md`:
+The AI derives the prototype scope from the Envision artifacts — not from a blank prompt. Create `aiplc-docs/discovery/prototypes/{solution-slug}/prototype-spec.md`:
 
 ```markdown
 # Prototype Specification
@@ -64,7 +72,7 @@ The AI derives the prototype scope from the Envision artifacts — not from a bl
 ### Out of Scope for Prototype
 | Feature | Reason | Deferred To |
 |---|---|---|
-| [Feature X] | Too complex for validation | Inception |
+| [Feature X] | Too complex for validation | Developer handoff |
 | [Feature Y] | Not needed to test core hypothesis | Post-launch |
 
 ## Validation Hypothesis
@@ -100,7 +108,7 @@ DO NOT proceed until the user confirms the prototype scope.
 
 ### Step 2: Design Context
 
-Create `aiplc-docs/discovery/prototype/design-context.md` with questions:
+Create `aiplc-docs/discovery/prototypes/{solution-slug}/design-context.md` with questions:
 
 ```markdown
 # Prototype Design Context
@@ -138,7 +146,7 @@ Provide any of the following that you have. Leave blank what you don't have.
 ## Question 2: Reference Product
 What product or tool should this feel similar to?
 
-A) I will provide a URL — the AI will analyze the visual style
+A) I will provide a URL — the AI will analyze the visual style (fetched under `common/security-guardrails.md`)
 B) Name a well-known product (e.g., "Salesforce-like", "Notion-like", "Jira-like", "AWS Console-like", "Slack-like")
 X) Other (please describe after [Answer]: tag below)
 
@@ -167,7 +175,7 @@ DO NOT proceed until all design context questions are answered.
 
 ### Step 3: Build Prototype
 
-Generate `aiplc-docs/discovery/prototype/build-instructions.md`:
+Generate `aiplc-docs/discovery/prototypes/{solution-slug}/build-instructions.md`:
 
 This file combines the prototype spec (Step 1) and design context (Step 2) into build instructions for the AI agent.
 
@@ -177,7 +185,8 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 **Context**: This is a rapid prototype for validation — NOT production code.
 
 **Optimize for**: Speed, working UI, core workflow completeness
-**Deprioritize**: Security hardening, error handling edge cases, scalability, code quality, extensive test coverage
+**Deprioritize**: Production hardening, error handling edge cases, scalability, code quality, extensive test coverage
+**Always apply**: `common/security-guardrails.md` (local only, isolated environment, credential rules)
 
 ## Features to Implement
 [From prototype-spec.md — numbered list with acceptance criteria]
@@ -231,36 +240,31 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 
 ## Technical Guidance
 - Use the simplest technology stack that works
-- Prefer local-first storage (SQLite, file-based, in-memory) unless cloud deployment is configured
-- If cloud deployment is available (AWS credentials, Amplify, CDK), deploy and provide URL
-- If cloud deployment is not available, provide local run instructions
+- Use local-first storage (SQLite, file-based, in-memory)
+- Run locally and provide local run instructions — do not deploy to cloud, even if credentials or deployment tooling are available
 - Frontend: lightweight framework or plain HTML/CSS/JS
 - Backend: single service, minimal dependencies
 - Tests: happy path only — enough to verify core flows work
 ```
 
+**If the solution calls an LLM** (agentic, or an application with AI features such as extraction or summarization), before building run these steps of `discovery/prototype-building.md` for it (write their questions to this stage's `prototype-questions.md`, not to `build-questions.md`): Step 2.4 (provider and region), Step 2.5 (credentials), Step 2.5b (model ID), and — for agentic solutions — the Strands environment detection in Step 2.7. Add the resulting provider, region, and model ID to `build-instructions.md`, and record them as the first entry of `iteration-log.md` (create it now, before the first iteration).
+
 **Instruct the AI agent to build the prototype from this file.**
 
-The AI agent reads `build-instructions.md` and generates the application code in the workspace, following the same code generation patterns used in the Construction phase but with relaxed quality constraints:
+The AI agent reads `build-instructions.md` and generates the application code in the workspace with prototype-level quality constraints:
 
-- Skip detailed functional design
-- Skip NFR requirements and design
-- Skip infrastructure design
+- No detailed functional, non-functional, or infrastructure design — that happens in the developer workspace
 - Minimal test coverage (happy path only)
-- No security hardening
-- No performance optimization
+- No production hardening or performance optimization (the rules in `common/security-guardrails.md` still apply)
 
-**If deployment is available** (AWS credentials configured, Amplify/CDK available): deploy and provide URL.
-
-**If deployment is not available**: provide local run instructions only. Prototypes run on localhost and must NOT be exposed to external networks via tunneling (ngrok, localtunnel, etc.) — they have access to the user's API credentials via environment variables and have no authentication layer.
+**Run locally only**: provide local run instructions. Prototypes run on localhost and must NOT be deployed to cloud or exposed to external networks via tunneling (ngrok, localtunnel, etc.) — they have access to the user's API credentials via environment variables and have no authentication layer. Sharing with validation users happens through demos the PM runs, not a public URL.
 
 Present completion:
 
 ```markdown
 # Prototype Built
 
-[If deployed]: Your prototype is live at: [URL]
-[If local]: Run with: `[command]` — accessible at http://localhost:[port]
+Run with: `[command]` — accessible at http://localhost:[port]
 
 **Design**: [Clean modern / Organization brand / Matching [product] / Minimal]
 **Device**: [Desktop / Mobile / Responsive]
@@ -279,6 +283,7 @@ What would you like to do?
 A) Review and iterate — I want to make changes
 B) Proceed to validation — share with target users
 C) Rebuild with different design — I want to change the look and feel
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -306,7 +311,7 @@ For each change request, the AI agent:
 2. Describes what will change (functional and/or visual)
 3. Waits for PM approval
 4. Applies the change
-5. Logs the iteration in `aiplc-docs/discovery/prototype/iteration-log.md`
+5. Logs the iteration in `aiplc-docs/discovery/prototypes/{solution-slug}/iteration-log.md`
 
 ```markdown
 ## Iteration [Number]
@@ -326,6 +331,7 @@ Your prototype is ready for validation.
 
 A) Proceed to validation setup
 B) I want to make more changes
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -334,7 +340,7 @@ B) I want to make more changes
 
 ### Step 5: Validation Setup
 
-Create `aiplc-docs/discovery/prototype/validation-plan.md`:
+Create `aiplc-docs/discovery/prototypes/{solution-slug}/validation-plan.md`:
 
 ```markdown
 # Validation Plan
@@ -344,7 +350,7 @@ How will you collect feedback from target users?
 
 A) I will conduct interviews or demos and report findings here
 B) I will send a survey and import results
-C) I will share the prototype link and collect informal feedback
+C) I will demo the prototype informally (screen share or in person) and collect feedback
 D) I have analytics or usage data I can import
 E) A combination of the above
 X) Other (please describe after [Answer]: tag below)
@@ -385,10 +391,9 @@ Validation plan set.
 - **Users**: [From Q2]
 - **Timeline**: [From Q3]
 
-When you have collected feedback, return and provide it. You can:
-- Paste feedback text directly
-- Provide a file path to import (.md, .docx, .csv)
-- Describe findings verbally
+When you have collected feedback, put it in `aiplc-docs/discovery/prototypes/{solution-slug}/validation-feedback.md` and tell me. You can:
+- Paste feedback text or interview notes into that file
+- Write the path of a file to import (.md, .docx, .csv) in that file
 
 I will synthesize everything against your original pain points.
 ```
@@ -398,7 +403,7 @@ Wait for the user to return with feedback data. DO NOT proceed until the user pr
 
 ### Step 6: Feedback Import and Synthesis
 
-When the user returns with feedback, synthesize it and create `aiplc-docs/discovery/prototype/validation-results.md`:
+When the user returns with feedback, synthesize it and create `aiplc-docs/discovery/prototypes/{solution-slug}/validation-results.md`:
 
 ```markdown
 # Validation Results
@@ -431,7 +436,7 @@ When the user returns with feedback, synthesize it and create `aiplc-docs/discov
 ## Unmet Needs Discovered
 | Need | Frequency | Recommended Action |
 |---|---|---|
-| [Need 1] | [X users mentioned] | [Add to Inception / Defer to post-launch / Ignore] |
+| [Need 1] | [X users mentioned] | [Add to developer handoff / Defer to post-launch / Ignore] |
 
 ## Design Feedback
 | Feedback | Frequency | Action Taken |
@@ -502,31 +507,29 @@ X) Other (please describe after [Answer]: tag below)
 
 **If Iterate (B)**: Return to Step 4. Apply changes, re-validate.
 **If Pivot (C)**: Return to Envision stage with validation feedback as new input context.
-**If Kill (D)**: Log decision in audit.md, archive artifacts, end workflow.
+**If Kill (D)**: Log decision in audit.md, write Part 3 (Step 8) with the Kill decision and rationale, then run "End of Discovery" in Artifact Contract (core-workflow.md) and end the workflow.
 **If Proceed (A)**: Continue to Step 8.
 
 ### Step 8: Write to Living Document
 
-Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
+Write **Part 3: Prototypes** in `aiplc-docs/discovery/discovery-document.md`:
 
 ```markdown
----
-
-# Part 2: Prototype & Validation
+# Part 3: Prototypes
 
 ## Prototype Spec
-[Summary referencing full spec in prototype/prototype-spec.md]
+[Summary referencing full spec in prototypes/{solution-slug}/prototype-spec.md]
 - **Features built**: [List]
 - **Design approach**: [Clean modern / Organization brand / Matching [product] / Minimal]
 - **Device target**: [Desktop / Mobile / Responsive]
 
 ## Build Approach
 - **Technology**: [Stack used by the AI agent]
-- **Deployment**: [URL if deployed / Local if not]
+- **Run**: [Local run command]
 - **Iterations**: [Count] — [Summary of key changes]
 
 ## Validation Results
-[Summary referencing full results in prototype/validation-results.md]
+[Summary referencing full results in prototypes/{solution-slug}/validation-results.md]
 - **Users**: [Count] | **Duration**: [Days] | **Feedback items**: [Count]
 - **Pain points validated**: [X of Y]
 - **Top user requests**: [List]
@@ -534,32 +537,29 @@ Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
 
 ## Build Decision: [PROCEED / ITERATE / PIVOT / KILL]
 - **Rationale**: [AI-synthesized rationale + PM decision]
-- **Recommendations for Inception**: [Features to add, modify, or remove based on validation]
+- **Recommendations for Developer Handoff**: [Features to add, modify, or remove based on validation]
 ```
 
-Update the document status header:
-```markdown
-**Status**: In Progress — Envision Complete, Prototype & Validation Complete
-```
+Update the document status header to `**Status**: In Progress — Prototype & Validation`.
 
 ### Step 9: Present Completion
 
 ```markdown
 # Prototype & Validation Stage Complete
 
-**Prototype**: [Deployed URL or local path]
+**Prototype**: [Local run command and path]
 **Design**: [Approach used]
 **Validation**: [X] users, [Y] days, [Z] feedback items
 **Build Decision**: [PROCEED / ITERATE / PIVOT / KILL]
 
 ## Artifacts Created
-- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 2: Prototype & Validation added)
-- `aiplc-docs/discovery/prototype/prototype-spec.md` — Prototype specification
-- `aiplc-docs/discovery/prototype/design-context.md` — Design context and brand guidelines
-- `aiplc-docs/discovery/prototype/build-instructions.md` — Build instructions for AI agent
-- `aiplc-docs/discovery/prototype/iteration-log.md` — Iteration history
-- `aiplc-docs/discovery/prototype/validation-plan.md` — Validation plan
-- `aiplc-docs/discovery/prototype/validation-results.md` — Validation results and synthesis
+- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 3: Prototypes)
+- `aiplc-docs/discovery/prototypes/{solution-slug}/prototype-spec.md` — Prototype specification
+- `aiplc-docs/discovery/prototypes/{solution-slug}/design-context.md` — Design context and brand guidelines
+- `aiplc-docs/discovery/prototypes/{solution-slug}/build-instructions.md` — Build instructions for AI agent
+- `aiplc-docs/discovery/prototypes/{solution-slug}/iteration-log.md` — Iteration history
+- `aiplc-docs/discovery/prototypes/{solution-slug}/validation-plan.md` — Validation plan
+- `aiplc-docs/discovery/prototypes/{solution-slug}/validation-results.md` — Validation results and synthesis
 
 ## Next Step
 Proceeding to **Product Strategy** to capture positioning, differentiation, and business model decisions — informed by validated prototype and real user feedback.
@@ -572,16 +572,7 @@ DO NOT proceed to Product Strategy until the user explicitly approves.
 
 ### Step 10: Update State Tracking
 
-Update `aiplc-docs/aiplc-state.md`:
-
-```markdown
-## Stage Progress
-### 🟣 DISCOVERY PHASE
-- [x] Envision
-- [x] Prototype & Validation
-- [ ] Product Strategy
-- [ ] Go-to-Market
-```
+In `aiplc-docs/aiplc-state.md`, mark `Prototype & Validation` as `[x]`.
 
 ### Step 11: Log and Proceed
 

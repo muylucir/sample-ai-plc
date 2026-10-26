@@ -1,11 +1,14 @@
 # Use Case Prioritization
 
 ## Purpose
-Prioritize all use cases and select top 3 for prototype development.
+Prioritize all use cases and select top 3 for prototype development (all of them, if there are 3 or fewer).
 
 ## When to Execute
 - After Use Case Intake completes
 - When multiple solutions identified from PR/FAQ
+
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/prioritization/prioritization-questions.md`, following `common/question-format-guide.md`. Do not ask them only in chat.
 
 ## Prioritization Frameworks
 
@@ -142,8 +145,9 @@ These represent the best balance of value, feasibility, and strategic fit.
 
 Do you agree with this selection?
 
-[A] Yes, proceed with these top 3
-[B] No, I want to adjust the selection (specify which use cases)
+A) Yes, proceed with these top 3
+B) No, I want to adjust the selection (specify which use cases)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -161,7 +165,7 @@ Ask:
 Which use cases would you like to prototype instead?
 (Select 3 use cases by name or rank number)
 
-Your selection:
+[Answer]:
 ```
 
 Confirm adjusted selection:
@@ -173,8 +177,9 @@ You've selected:
 
 Proceed with these 3 use cases?
 
-[A] Yes
-[B] No, let me adjust again
+A) Yes
+B) No, let me adjust again
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -247,6 +252,10 @@ Create files:
 ## Rationale
 {Why these 3 were selected}
 ```
+
+## Step 6: Write to Discovery Document and State
+
+Add a **Prioritization** section to **Part 2: Solution Selection** in `discovery-document.md` (ranked lists and the selected use cases, with rationale). Record the selected use cases under **Shortlisted Use Cases** in `aiplc-state.md` and mark `Use Case Prioritization` as `[x]`.
 
 ## Audit Logging
 

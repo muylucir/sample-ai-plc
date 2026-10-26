@@ -48,9 +48,10 @@
 
 ### Text Alternative (always include)
 ```
-Phase 1: INCEPTION
-- Stage 1: Workspace Detection (COMPLETED)
-- Stage 2: Requirements Analysis (COMPLETED)
+DISCOVERY PHASE (Path B)
+- Workspace Detection (COMPLETED)
+- Use Case Intake (COMPLETED)
+- Use Case Prioritization (IN PROGRESS)
 [continue with text representation]
 ```
 

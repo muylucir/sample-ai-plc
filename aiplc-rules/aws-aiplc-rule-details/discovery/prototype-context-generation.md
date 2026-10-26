@@ -14,6 +14,9 @@ For each of the 3 selected use cases, gather detailed context and generate a com
 - Shared with other teams for parallel prototype development
 - Used in future sessions to build prototypes
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/prototypes/{use-case-slug}/context-questions.md` for each use case (Questions 1-5), and `aiplc-docs/discovery/prototypes/next-step-questions.md` for the final decision, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Step 1: Announce Context Generation
 
 ```
@@ -47,14 +50,17 @@ For {Use Case Name}:
 What's your company/product website URL for brand matching?
 (The prototype will match the look and feel of this site)
 
-Your answer:
+[Answer]:
 ```
+
+If a URL is provided, fetch it only under "Fetching User-Provided URLs" in `common/security-guardrails.md`, and extract only design information (colors, typography, layout style).
 
 If no URL provided, ask:
 ```
 Would you like to:
-[A] Describe the brand style (colors, tone, etc.)
-[B] Use a generic modern design
+A) Describe the brand style (colors, tone, etc.)
+B) Use a generic modern design
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -64,9 +70,10 @@ Would you like to:
 ```
 What device(s) should this prototype target?
 
-[A] Mobile (smartphone)
-[B] Desktop (web browser)
-[C] Both (responsive design)
+A) Mobile (smartphone)
+B) Desktop (web browser)
+C) Both (responsive design)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -84,7 +91,7 @@ Examples:
 - File search
 - Calculation
 
-Your answer:
+[Answer]:
 ```
 
 #### Question 4: Key Screens/Views (for Application use cases)
@@ -100,7 +107,7 @@ Examples:
 - Form
 - Settings
 
-Your answer:
+[Answer]:
 ```
 
 #### Question 5: Sample Interactions (for Agentic use cases)
@@ -112,7 +119,7 @@ Example format:
 1. User asks: "..." → Agent responds: "..."
 2. User asks: "..." → Agent responds: "..."
 
-Your answer:
+[Answer]:
 ```
 
 ## Step 3: Generate PROTOTYPE-{use-case}.md File
@@ -176,14 +183,21 @@ These files contain complete specifications for building prototypes.
 
 What would you like to do next?
 
-[A] Build all 3 prototypes now (in this session)
-[B] Stop here - I'll share these files with teams to build prototypes separately
-[C] Build only specific prototypes (specify which)
+A) Build all 3 prototypes now (in this session)
+B) Stop here - I'll share these files with teams to build prototypes separately
+C) Build only specific prototypes (specify which)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
 
+## Step 5b: Write to Discovery Document
+
+Before asking the Step 5 question, write **Part 3: Prototypes** in `discovery-document.md` with a **Prototype Specifications** section: one line per PROTOTYPE-*.md (use case, type, file path). `Prototype Context Generation` stays the **Current Stage** until the user answers the Step 5 question.
+
 ## Step 6: Handle User Decision
+
+Once the user has answered, mark `Prototype Context Generation` as `[x]` in `aiplc-state.md`, then:
 
 ### If [A] - Build all 3 now:
 - Proceed to `prototype-building.md`
@@ -191,8 +205,9 @@ What would you like to do next?
 
 ### If [B] - Stop here (handoff mode):
 - Confirm files are ready for sharing
-- Optionally continue to Product Strategy for one use case
-- End Discovery phase
+- Mark `Prototype Building` as `[-]` (handed off) in `aiplc-state.md`
+- Offer to continue to Product Strategy → GTM for one use case; if the user accepts, ask which one and record it under **Selected Use Case(s) for Strategy**
+- Otherwise end Discovery: run "End of Discovery" in Artifact Contract (core-workflow.md)
 
 ### If [C] - Build specific prototypes:
 - Ask which ones to build
@@ -247,5 +262,5 @@ This file will track iterations made to the prototype during building and valida
 ## Next Steps
 
 - If [A] → `prototype-building.md`
-- If [B] → Optional: Product Strategy, then end
+- If [B] → Optional: Product Strategy → GTM for the selected use case, then end
 - If [C] → `prototype-building.md` (for selected use cases)
