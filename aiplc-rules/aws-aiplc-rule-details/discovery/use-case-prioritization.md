@@ -7,6 +7,9 @@ Prioritize all use cases and select top 3 for prototype development (all of them
 - After Use Case Intake completes
 - When multiple solutions identified from PR/FAQ
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/prioritization/prioritization-questions.md`, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Prioritization Frameworks
 
 ### Framework 1: Agentic Use Cases
@@ -142,8 +145,9 @@ These represent the best balance of value, feasibility, and strategic fit.
 
 Do you agree with this selection?
 
-[A] Yes, proceed with these top 3
-[B] No, I want to adjust the selection (specify which use cases)
+A) Yes, proceed with these top 3
+B) No, I want to adjust the selection (specify which use cases)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -161,7 +165,7 @@ Ask:
 Which use cases would you like to prototype instead?
 (Select 3 use cases by name or rank number)
 
-Your selection:
+[Answer]:
 ```
 
 Confirm adjusted selection:
@@ -173,8 +177,9 @@ You've selected:
 
 Proceed with these 3 use cases?
 
-[A] Yes
-[B] No, let me adjust again
+A) Yes
+B) No, let me adjust again
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```

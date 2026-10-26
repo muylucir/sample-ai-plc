@@ -36,6 +36,9 @@ For each identified solution, determine:
 - Different options to address pain points
 - Could be solved in different ways
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/solution-analysis/solution-analysis-questions.md`, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Branching Logic
 
 ### Branch A.1: Single Solution Identified
@@ -53,12 +56,16 @@ This solution addresses the pain points by:
 - {Key capability 2}
 - {Key capability 3}
 
-I'll proceed to prototype this solution.
+Continue to prototype this solution?
 
-Continue to prototype? [Yes/No]
+A) Yes, prototype this solution
+B) No, I want to revise the PR/FAQ first
+X) Other (please describe after [Answer]: tag below)
+
+[Answer]:
 ```
 
-If Yes → Record the solution as the selected use case and **Path A.1** in `aiplc-state.md`, then proceed to `prototype-validation.md` (single prototype flow)
+If A → Record the solution as the selected use case and **Path A.1** in `aiplc-state.md`, then proceed to `prototype-validation.md` (single prototype flow)
 
 ### Branch A.2: Multiple Solutions Identified
 
@@ -85,8 +92,9 @@ These solutions include:
 
 Would you like to prioritize these and prototype the top 3?
 
-[A] Yes, prioritize and prototype top 3
-[B] No, focus on just one solution (specify which)
+A) Yes, prioritize and prototype top 3
+B) No, focus on just one solution (specify which)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```

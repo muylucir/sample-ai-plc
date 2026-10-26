@@ -8,6 +8,9 @@ Determine how to start the Discovery phase based on user's situation.
 - This is the first question after workspace detection
 - Executed before any other Discovery activities
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/discovery-mode-questions.md`, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Decision Point
 
 Ask the user:
@@ -15,8 +18,9 @@ Ask the user:
 ```
 How would you like to start Discovery?
 
-[A] Start from customer pain points (create PR/FAQ)
-[B] I already have use cases to prioritize
+A) Start from customer pain points (create PR/FAQ)
+B) I already have use cases to prioritize
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```

@@ -41,8 +41,9 @@ Rule details location: `./aws-aiplc-rule-details/`
 **CRITICAL**: When asking questions at any phase, you MUST follow question format guidelines.
 
 **See `common/question-format-guide.md` for complete question formatting rules including**:
-- Multiple choice format (A, B, C, D, E options)
+- Choice questions (A, B, C... plus `X) Other`) and open questions
 - [Answer]: tag usage
+- Where question files live, and the only things that may be asked in chat
 - Answer validation and ambiguity resolution
 
 ## MANDATORY: Custom Welcome Message
@@ -108,12 +109,13 @@ The Discovery Phase has **THREE ENTRY POINTS**:
 
 Load `discovery/discovery-mode-selection.md`
 
-Ask user:
+Ask user (in `aiplc-docs/discovery/discovery-mode-questions.md`):
 ```
 How would you like to start Discovery?
 
-[A] Start from customer pain points (create PR/FAQ)
-[B] I already have use cases to prioritize
+A) Start from customer pain points (create PR/FAQ)
+B) I already have use cases to prioritize
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -201,13 +203,14 @@ Load `discovery/prototype-context-generation.md`
 
 ### Step 4: Decision Point
 
-Ask user:
+Ask user (in `aiplc-docs/discovery/prototypes/next-step-questions.md`):
 ```
 What would you like to do next?
 
-[A] Build all 3 prototypes now (in this session)
-[B] Stop here - hand off PROTOTYPE-*.md files to teams
-[C] Build only specific prototypes
+A) Build all 3 prototypes now (in this session)
+B) Stop here - hand off PROTOTYPE-*.md files to teams
+C) Build only specific prototypes
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -296,7 +299,7 @@ This Discovery Document will be provided to developers in a separate workspace f
 - **Workshop-Friendly**: PROTOTYPE-*.md files are portable and shareable
 - **Scalable**: Supports any number of use cases (N)
 - **Transparent**: Always show defaults, ask for LLM provider
-- **Standard AI-PLC**: Uses [Answer]: format throughout
+- **Standard AI-PLC**: Uses question files with [Answer]: tags throughout
 - **Handoff-Ready**: Can stop after generating PROTOTYPE-*.md files
 - **Complete Output**: Discovery Document ready for developers
 
@@ -355,6 +358,8 @@ aiplc-docs/
 ├── aiplc-state.md
 └── audit.md
 ```
+
+Each stage also writes its question files (`*-questions.md`) in its own directory — see `common/question-format-guide.md` and the "Question Files" section of each stage. `aiplc-docs/resume-questions.md` holds the welcome-back question when a session resumes.
 
 ## Artifact Contract
 

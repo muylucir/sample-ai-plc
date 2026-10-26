@@ -1,7 +1,7 @@
 # Session Continuity Templates
 
 ## Welcome Back Prompt Template
-When a user returns to continue work on an existing AI-PLC project, present this prompt:
+When a user returns to continue work on an existing AI-PLC project, write this prompt to `aiplc-docs/resume-questions.md` and tell the user in chat that it is ready:
 
 ```markdown
 **Welcome back! I can see you have an existing AI-PLC Discovery session in progress.**
@@ -17,6 +17,7 @@ Based on your aiplc-state.md, here's your current status:
 
 A) Continue where you left off ([Next step description])
 B) Review a previous stage ([Show available stages])
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]: 
 ```

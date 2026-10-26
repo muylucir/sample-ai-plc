@@ -16,6 +16,9 @@ This stage reads PROTOTYPE-{use-case}.md files and builds working prototypes tha
 - Validated by users
 - Used for Product Strategy decisions
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/prototypes/{use-case-slug}/build-questions.md` for each prototype, and `aiplc-docs/discovery/prototypes/selection-questions.md` for the selection in Step 3, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Step 1: Identify PROTOTYPE-*.md Files
 
 Scan for files matching pattern: `aiplc-docs/discovery/prototypes/*/PROTOTYPE-*.md`
@@ -68,8 +71,9 @@ DEFAULTS FOR MISSING ITEMS:
 🔧 Device: Both mobile and desktop (if not specified)
 
 Would you like to:
-[A] Proceed with these settings
-[B] Update any of these settings
+A) Proceed with these settings
+B) Update any of these settings
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -92,7 +96,7 @@ Current defaults:
 4. Device: {device}
 5. Port: {port}
 
-Please specify what you'd like to change:
+[Answer]:
 ```
 
 Gather updates, then show updated configuration and ask for confirmation again.
@@ -104,11 +108,11 @@ If use case is Agentic and LLM provider not specified:
 ```
 Which LLM provider would you like to use for {Use Case Name}?
 
-[A] AWS Bedrock (default - newest active Claude Sonnet via an inference profile for your region)
-[B] Anthropic
-[C] OpenAI
-[D] Google Gemini
-[E] Other
+A) AWS Bedrock (default - newest active Claude Sonnet via an inference profile for your region)
+B) Anthropic
+C) OpenAI
+D) Google Gemini
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -288,8 +292,9 @@ This will:
 
 Proceed with building the prototype?
 
-[A] Yes, build the prototype
-[B] No, I need to make changes
+A) Yes, build the prototype
+B) No, I need to make changes
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -323,6 +328,7 @@ We need the Strands SDK to build your AI agent. How brave are you feeling today?
 
 A) Mock it — fake the agent responses so I can see the UI and flow without installing anything. I'll let the developers handle the real wiring later. (No SDKs, no drama, just vibes.)
 B) Let's ride — I trust you, AI. Install whatever you need and let's build this thing for real. Hold my coffee. ☕
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -385,9 +391,10 @@ The prototype includes:
 Please test the prototype and let me know if you'd like any iterations.
 
 What would you like to do?
-[A] Test and iterate on this prototype
-[B] Continue to next prototype (if more exist)
-[C] This prototype is good, move on
+A) Test and iterate on this prototype
+B) Continue to next prototype (if more exist)
+C) This prototype is good, move on
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -406,7 +413,7 @@ You can request:
 - Performance improvements
 - Bug fixes
 
-Describe the changes:
+[Answer]:
 ```
 
 Make requested changes, redeploy, and ask for validation again.
@@ -438,11 +445,12 @@ Summary:
 Which prototype would you like to move forward with for 
 Product Strategy and Go-to-Market?
 
-[A] {Use Case 1}
-[B] {Use Case 2}
-[C] {Use Case 3}
-[D] Multiple use cases
-[E] None - need more iteration
+A) {Use Case 1}
+B) {Use Case 2}
+C) {Use Case 3}
+D) Multiple use cases
+E) None - need more iteration
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -454,8 +462,9 @@ If single prototype:
 
 Ready to move to Product Strategy for this use case?
 
-[A] Yes, continue to Product Strategy
-[B] No, I need more iterations
+A) Yes, continue to Product Strategy
+B) No, I need more iterations
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```

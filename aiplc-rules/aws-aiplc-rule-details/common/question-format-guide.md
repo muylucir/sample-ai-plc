@@ -2,21 +2,26 @@
 
 ## MANDATORY: All Questions Must Use This Format
 
-### Rule: Never Ask Questions in Chat
-**CRITICAL**: You must NEVER ask questions directly in the chat. ALL questions must be placed in dedicated question files.
+### Rule: Questions Go in Question Files
+**CRITICAL**: Every question that asks the user to make a choice or provide information MUST be written to a question file — never asked only in chat. This applies on every host, even when the host offers its own interactive question UI: question files are recorded in the workspace, can be answered at the user's pace, and let any host resume the session.
 
-### Question File Format
+### Allowed in Chat (the only exceptions)
+1. **Status and progress messages** that need no answer
+2. **Approval gates** after an artifact is presented ("Please review ... and confirm to proceed") — the user approves or requests changes in chat
+3. **"Let me know when you're done"** prompts after a question file is created
+4. **Iteration requests** on a running prototype ("make the header darker") during Prototype Building or Prototype & Validation iteration — log them in `iteration-log.md`
 
-#### File Naming Convention
-- Use descriptive names: `{phase-name}-questions.md`
-- Examples:
-  - `classification-questions.md`
-  - `requirements-questions.md`
-  - `story-planning-questions.md`
-  - `design-questions.md`
+Anything else — including yes/no decisions, selections, counts, and free-text inputs — goes in a question file. Credentials are never requested in chat or in question files.
 
-#### Question Structure
-Every question must include meaningful options plus "Other" as the last option:
+### Question File Location and Naming
+- Write question files in the current stage's directory under `aiplc-docs/discovery/` (see the directory tree in core-workflow.md). Each stage file names its question file.
+- Name: `{topic}-questions.md` (for example `solution-analysis-questions.md`, `build-questions.md`)
+- Follow-up clarifications: `{topic}-clarification-questions.md` in the same directory
+
+### Two Question Types
+
+#### Choice Question
+Meaningful options plus "Other" as the last option. "Other" is **always** labeled `X)`, whatever the number of options, so it never collides with a real option letter.
 
 ```markdown
 ## Question [Number]
@@ -30,60 +35,65 @@ X) Other (please describe after [Answer]: tag below)
 [Answer]: 
 ```
 
-**CRITICAL**: 
-- "Other" is MANDATORY as the LAST option for every question
+#### Open Question
+For information that has no meaningful options (a URL, a count, a list of use cases, sample interactions). No options; the user writes free text after the tag.
+
+```markdown
+## Question [Number]
+[Clear, specific question text]
+[Optional: fields to cover or an example of the expected format]
+
+[Answer]: 
+```
+
+**CRITICAL**:
+- "Other" (`X)`) is MANDATORY as the LAST option for every choice question
 - Only include meaningful options - don't make up options to fill slots
 - Use as many or as few options as make sense (minimum 2 + Other)
+- When a choice needs a short detail (for example "B) I use an AWS CLI profile — profile name"), the user writes the letter followed by the detail after `[Answer]:`
 
 ### Complete Example
 
 ```markdown
-# Requirements Clarification Questions
+# Use Case Intake Questions
 
-Please answer the following questions to help clarify the requirements.
+Please answer the following questions. Fill in your answer after each [Answer]: tag.
 
 ## Question 1
-What is the primary user authentication method?
-
-A) Username and password
-B) Social media login (Google, Facebook)
-C) Single Sign-On (SSO)
-D) Multi-factor authentication
-E) Other (please describe after [Answer]: tag below)
+How many use cases do you want to evaluate?
 
 [Answer]: 
 
 ## Question 2
-Will this be a web or mobile application?
-
-A) Web application
-B) Mobile application
-C) Both web and mobile
-D) Other (please describe after [Answer]: tag below)
+Please describe each use case. For each one, include: name, problem it solves, target users,
+business value (High/Medium/Low), technical complexity (High/Medium/Low), type
+(Agentic or Application), 2-3 key capabilities, and any constraints.
+You can paste a list or a table.
 
 [Answer]: 
 
 ## Question 3
-Is this a new project or existing codebase?
+Which device should the prototypes target by default?
 
-A) New project (greenfield)
-B) Existing codebase (brownfield)
-C) Other (please describe after [Answer]: tag below)
+A) Desktop browser
+B) Mobile phone
+C) Both (responsive design)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]: 
 ```
 
 ### User Response Format
-Users will answer by filling in the letter choice after [Answer]: tag:
+Users answer by filling in the letter choice (choice question) or text (open question) after the [Answer]: tag:
 
 ```markdown
-## Question 1
-What is the primary user authentication method?
+## Question 3
+Which device should the prototypes target by default?
 
-A) Username and password
-B) Social media login (Google, Facebook)
-C) Single Sign-On (SSO)
-D) Multi-factor authentication
+A) Desktop browser
+B) Mobile phone
+C) Both (responsive design)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]: C
 ```
@@ -91,36 +101,36 @@ D) Multi-factor authentication
 ### Reading User Responses
 After user confirms completion:
 1. Read the question file
-2. Extract answers after [Answer]: tags
+2. Extract answers: an answer is everything after `[Answer]:` up to the next question heading — it may span several lines
 3. Validate all questions are answered
 4. Proceed with analysis based on responses
 
 ### Multiple Choice Guidelines
 
 #### Option Count
-- Minimum: 2 meaningful options + "Other" (A, B, C)
-- Typical: 3-4 meaningful options + "Other" (A, B, C, D, E)
-- Maximum: 5 meaningful options + "Other" (A, B, C, D, E, F)
+- Minimum: 2 meaningful options + "Other"
+- Typical: 3-4 meaningful options + "Other"
+- Maximum: 5 meaningful options + "Other"
 - **CRITICAL**: Don't make up options just to fill slots - only include meaningful choices
 
 #### Option Quality
 - Make options mutually exclusive
 - Cover the most common scenarios
 - Only include meaningful, realistic options
-- **ALWAYS include "Other" as the LAST option** (MANDATORY)
+- **ALWAYS include "Other" (`X)`) as the LAST option** (MANDATORY)
 - Be specific and clear
-- **Don't make up options to fill A, B, C, D slots**
+- Where a stage defines an intelligent default, put it first as Option A
 
 #### Good Example:
 ```markdown
 ## Question 5
-What database technology will be used?
+What revenue model fits this product best?
 
-A) Relational (PostgreSQL, MySQL)
-B) NoSQL Document (MongoDB, DynamoDB)
-C) NoSQL Key-Value (Redis, Memcached)
-D) Graph Database (Neo4j, Neptune)
-E) Other (please describe after [Answer]: tag below)
+A) Subscription ← Suggested based on your pain point analysis
+B) Usage-based pricing
+C) Freemium with paid tiers
+D) One-time purchase
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]: 
 ```
@@ -128,7 +138,7 @@ E) Other (please describe after [Answer]: tag below)
 #### Bad Example (Avoid):
 ```markdown
 ## Question 5
-What database will you use?
+What revenue model will you use?
 
 A) Yes
 B) No
@@ -141,14 +151,14 @@ C) Maybe
 
 #### Step 1: Create Question File
 ```markdown
-Create aiplc-docs/{phase-name}-questions.md with all questions
+Create the stage's question file (for example aiplc-docs/discovery/solution-analysis/solution-analysis-questions.md) with all questions
 ```
 
 #### Step 2: Inform User
 ```
-"I've created {phase-name}-questions.md with [X] questions. 
-Please answer each question by filling in the letter choice after the [Answer]: tag. 
-If none of the options match your needs, choose the last option (Other) and describe your preference. Let me know when you're done."
+"I've created {file} with [X] questions. 
+Please answer each question after the [Answer]: tag — a letter for multiple-choice questions, text for open questions. 
+If none of the options match your needs, choose X (Other) and describe your preference. Let me know when you're done."
 ```
 
 #### Step 3: Wait for Confirmation
@@ -156,7 +166,7 @@ Wait for user to say "done", "completed", "finished", or similar.
 
 #### Step 4: Read and Analyze
 ```
-Read aiplc-docs/{phase-name}-questions.md
+Read the question file
 Extract all answers
 Validate completeness
 Proceed with analysis
@@ -167,22 +177,21 @@ Proceed with analysis
 #### Missing Answers
 If any [Answer]: tag is empty:
 ```
-"I noticed Question [X] is not answered. Please provide an answer using one of the letter choices 
-for all questions before proceeding."
+"I noticed Question [X] is not answered. Please provide an answer for all questions before proceeding."
 ```
 
 #### Invalid Answers
-If answer is not a valid letter choice:
+If a choice question's answer does not start with one of its letters:
 ```
 "Question [X] has an invalid answer '[answer]'. 
-Please use only the letter choices provided in the question."
+Please use one of the letter choices provided, or X (Other) with a description."
 ```
 
 #### Ambiguous Answers
-If user provides explanation instead of letter:
+If user provides explanation instead of letter on a choice question:
 ```
 "For Question [X], please provide the letter choice that best matches your answer. 
-If none match, choose 'Other' and add your description after the [Answer]: tag."
+If none match, choose X (Other) and add your description after the [Answer]: tag."
 ```
 
 ### Contradiction and Ambiguity Detection
@@ -190,29 +199,28 @@ If none match, choose 'Other' and add your description after the [Answer]: tag."
 **MANDATORY**: After reading user responses, you MUST check for contradictions and ambiguities.
 
 #### Detecting Contradictions
-Look for logically inconsistent answers:
-- Scope mismatch: "Bug fix" but "Entire codebase affected"
-- Risk mismatch: "Low risk" but "Breaking changes"
-- Timeline mismatch: "Quick fix" but "Multiple subsystems"
-- Impact mismatch: "Single component" but "Significant architecture changes"
+Look for logically inconsistent answers, for example:
+- Target mismatch: "Enterprise IT buyers" but "Self-serve consumer sign-up"
+- Pricing mismatch: "Premium positioning" but "Free forever, no paid tier"
+- Scope mismatch: "Prototype in one day" but "Five integrated external systems"
 
 #### Detecting Ambiguities
 Look for unclear or borderline responses:
-- Answers that could fit multiple classifications
-- Responses that lack specificity
+- Answers that could fit multiple options
+- Responses that lack specificity ("depends", "maybe", "mix of")
 - Conflicting indicators across multiple questions
 
 #### Creating Clarification Questions
 If contradictions or ambiguities detected:
 
-1. **Create clarification file**: `{phase-name}-clarification-questions.md`
+1. **Create clarification file**: `{topic}-clarification-questions.md` in the same directory
 2. **Explain the issue**: Clearly state what contradiction/ambiguity was detected
-3. **Ask targeted questions**: Use multiple choice format to resolve the issue
+3. **Ask targeted questions**: Use the formats above to resolve the issue
 4. **Reference original questions**: Show which questions had conflicting answers
 
 **Example**:
 ```markdown
-# [Phase Name] Clarification Questions
+# [Stage Name] Clarification Questions
 
 I detected contradictions in your responses that need clarification:
 
@@ -226,7 +234,7 @@ These responses are contradictory because [explanation].
 A) [Option that resolves toward first answer]
 B) [Option that resolves toward second answer]
 C) [Option that provides middle ground]
-D) [Option that reframes the question]
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]: 
 
@@ -238,8 +246,7 @@ Your response to Q[X] ("[Answer]") is ambiguous because [explanation].
 
 A) [Clear option 1]
 B) [Clear option 2]
-C) [Clear option 3]
-D) [Clear option 4]
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]: 
 ```
@@ -251,18 +258,7 @@ D) [Clear option 4]
 3. **Inform**: Tell user about the issues and clarification file
 4. **Wait**: Do not proceed until user provides clarifications
 5. **Re-validate**: After clarifications, check again for consistency
-6. **Proceed**: Only move forward when all contradictions are resolved
-
-#### Example User Message
-```
-"I detected 2 contradictions in your responses:
-
-1. Bug fix scope vs. codebase impact (Q1 vs Q2)
-2. Low risk vs. breaking changes (Q7 vs Q4)
-
-I've created classification-clarification-questions.md with 2 questions to resolve these.
-Please answer these clarifying questions before I can proceed with classification."
-```
+6. **Proceed**: Only move forward when all contradictions are resolved, or the user explicitly asks to proceed — then record the assumption made in the stage artifact and `audit.md`
 
 ### Best Practices
 
@@ -272,134 +268,19 @@ Please answer these clarifying questions before I can proceed with classificatio
 4. **Be Practical**: Options should be realistic and actionable
 5. **Be Consistent**: Use same format throughout all question files
 
-### Phase-Specific Examples
-
-#### Discovery Mode Selection
-```markdown
-## Question 1
-How would you like to start Discovery?
-
-A) Start from customer pain points (create PR/FAQ)
-B) I already have use cases to prioritize
-C) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
-#### LLM Provider Selection (Prototype Building)
-```markdown
-## Question 1
-Which LLM provider would you like to use for this agent?
-
-A) AWS Bedrock
-B) Anthropic
-C) OpenAI
-D) Google Gemini
-E) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
-#### Prototype Building Configuration
-```markdown
-## Question 1
-Would you like to proceed with these settings or update any?
-
-A) Proceed with these settings
-B) Update some settings
-C) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-
-## Question 2
-What device(s) should this prototype target?
-
-A) Mobile (smartphone)
-B) Desktop (web browser)
-C) Both (responsive design)
-D) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
-#### Use Case Prioritization Decision
-```markdown
-## Question 1
-Do you agree with the top 3 use case selection?
-
-A) Yes, proceed with these top 3
-B) No, I want to adjust the selection
-C) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
-#### Prototype Context Generation Decision
-```markdown
-## Question 1
-What would you like to do with the generated PROTOTYPE-*.md files?
-
-A) Build all 3 prototypes now (in this session)
-B) Stop here - hand off these files to teams
-C) Build only specific prototypes
-D) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
-#### Example with 2 meaningful options:
-```markdown
-## Question 1
-Is this a new project or existing codebase?
-
-A) New project (greenfield)
-B) Existing codebase (brownfield)
-C) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
-#### Example with 3 meaningful options:
-```markdown
-## Question 2
-What is the deployment target?
-
-A) Cloud (AWS, Azure, GCP)
-B) On-premises servers
-C) Hybrid (both cloud and on-premises)
-D) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
-#### Example with 4 meaningful options:
-```markdown
-## Question 3
-What architectural pattern should be used?
-
-A) Monolithic architecture
-B) Microservices architecture
-C) Serverless architecture
-D) Event-driven architecture
-E) Other (please describe after [Answer]: tag below)
-
-[Answer]: 
-```
-
 ## Summary
 
 **Remember**: 
-- ✅ Always create question files
-- ✅ Always use multiple choice format
-- ✅ **Always include "Other" as the LAST option (MANDATORY)**
+- ✅ Always create question files (exceptions: status messages, approval gates, "let me know when done", prototype iteration requests)
+- ✅ Choice questions: options plus `X) Other` as the last option
+- ✅ Open questions: free text after `[Answer]:`
 - ✅ Only include meaningful options - don't make up options to fill slots
 - ✅ Always use [Answer]: tags
 - ✅ Always wait for user completion
 - ✅ Always validate responses for contradictions
 - ✅ Always create clarification files if needed
-- ✅ Always resolve contradictions before proceeding
-- ❌ Never ask questions in chat
+- ❌ Never ask decision or input questions only in chat
+- ❌ Never ask for credentials in chat or question files
 - ❌ Never make up options just to have A, B, C, D
 - ❌ Never proceed without answers
-- ❌ Never proceed with unresolved contradictions
-- ❌ Never make assumptions about ambiguous responses
+- ❌ Never make assumptions about ambiguous responses without recording them

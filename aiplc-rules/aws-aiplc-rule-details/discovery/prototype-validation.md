@@ -16,6 +16,9 @@
 
 **Purpose**: Translate validated scope into a prototype specification, capture design context, guide the AI agent through building a working prototype, structure user validation, synthesize feedback against original pain points, and make a build decision.
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/prototypes/{solution-slug}/prototype-questions.md` for the spec approval, build, iteration, and build decision questions; the design-context and validation-plan files below hold their own questions, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Prerequisites
 - Envision stage must be complete and approved
 - `aiplc-docs/discovery/discovery-document.md` must exist with Part 1 (Problem & Opportunity) populated
@@ -276,6 +279,7 @@ What would you like to do?
 A) Review and iterate — I want to make changes
 B) Proceed to validation — share with target users
 C) Rebuild with different design — I want to change the look and feel
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -323,6 +327,7 @@ Your prototype is ready for validation.
 
 A) Proceed to validation setup
 B) I want to make more changes
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```

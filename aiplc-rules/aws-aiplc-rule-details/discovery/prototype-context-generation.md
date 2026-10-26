@@ -14,6 +14,9 @@ For each of the 3 selected use cases, gather detailed context and generate a com
 - Shared with other teams for parallel prototype development
 - Used in future sessions to build prototypes
 
+## Question Files
+Write every question in this stage to `aiplc-docs/discovery/prototypes/{use-case-slug}/context-questions.md` for each use case (Questions 1-5), and `aiplc-docs/discovery/prototypes/next-step-questions.md` for the final decision, following `common/question-format-guide.md`. Do not ask them only in chat.
+
 ## Step 1: Announce Context Generation
 
 ```
@@ -47,7 +50,7 @@ For {Use Case Name}:
 What's your company/product website URL for brand matching?
 (The prototype will match the look and feel of this site)
 
-Your answer:
+[Answer]:
 ```
 
 If a URL is provided, fetch it only under "Fetching User-Provided URLs" in `common/security-guardrails.md`, and extract only design information (colors, typography, layout style).
@@ -55,8 +58,9 @@ If a URL is provided, fetch it only under "Fetching User-Provided URLs" in `comm
 If no URL provided, ask:
 ```
 Would you like to:
-[A] Describe the brand style (colors, tone, etc.)
-[B] Use a generic modern design
+A) Describe the brand style (colors, tone, etc.)
+B) Use a generic modern design
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -66,9 +70,10 @@ Would you like to:
 ```
 What device(s) should this prototype target?
 
-[A] Mobile (smartphone)
-[B] Desktop (web browser)
-[C] Both (responsive design)
+A) Mobile (smartphone)
+B) Desktop (web browser)
+C) Both (responsive design)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -86,7 +91,7 @@ Examples:
 - File search
 - Calculation
 
-Your answer:
+[Answer]:
 ```
 
 #### Question 4: Key Screens/Views (for Application use cases)
@@ -102,7 +107,7 @@ Examples:
 - Form
 - Settings
 
-Your answer:
+[Answer]:
 ```
 
 #### Question 5: Sample Interactions (for Agentic use cases)
@@ -114,7 +119,7 @@ Example format:
 1. User asks: "..." → Agent responds: "..."
 2. User asks: "..." → Agent responds: "..."
 
-Your answer:
+[Answer]:
 ```
 
 ## Step 3: Generate PROTOTYPE-{use-case}.md File
@@ -178,9 +183,10 @@ These files contain complete specifications for building prototypes.
 
 What would you like to do next?
 
-[A] Build all 3 prototypes now (in this session)
-[B] Stop here - I'll share these files with teams to build prototypes separately
-[C] Build only specific prototypes (specify which)
+A) Build all 3 prototypes now (in this session)
+B) Stop here - I'll share these files with teams to build prototypes separately
+C) Build only specific prototypes (specify which)
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```

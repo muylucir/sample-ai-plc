@@ -26,8 +26,8 @@
 • **Handoff**: Developers use Discovery Document in their workspace for Inception, Construction, and Operations phases
 
 ## Your Role as Product Manager:
-• **Answer questions** in dedicated question files using [Answer]: tags with letter choices (A, B, C, D, E)
-• **Option E available**: Choose "Other" and describe your custom response if provided options don't match
+• **Answer questions** in dedicated question files using [Answer]: tags — a letter for multiple-choice questions, text for open questions
+• **Option X available**: Choose "Other" and describe your custom response if provided options don't match
 • **Review and approve** each Discovery stage before proceeding
 • **Make product decisions** on strategy, positioning, and go-to-market
 • **Important**: Focus on product vision - technical implementation happens in developer workspace
