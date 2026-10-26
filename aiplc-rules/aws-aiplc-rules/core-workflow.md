@@ -371,6 +371,7 @@ Each stage also writes its question files (`*-questions.md`) in its own director
 - Part 1: Envision (Path A) or Use Case Intake (Path B)
 - Part 2: **Identified Solutions** (Solution Analysis), **Prioritization** (Use Case Prioritization)
 - Part 3: **Prototype Specifications** (Prototype Context Generation; Prototype Building on Entry Point 1), **Build Results** (Prototype Building), or **Prototype & Validation** (Path A.1)
+- Part 4: Product Strategy, including **Strategy Candidates Not Covered** when several use cases were selected
 
 ```markdown
 # Discovery Document

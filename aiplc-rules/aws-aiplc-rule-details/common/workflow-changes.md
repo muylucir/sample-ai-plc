@@ -32,7 +32,7 @@ Prototype & Validation / Prototype Building --> Product Strategy --> Go-to-Marke
 4. **Execute Stage**: Follow normal stage execution
 5. **Log Change**: Document in `audit.md` with timestamp and reason
 
-**If Discovery had already ended**: set the document `Status` back to `In Progress — [stage]` and replace that stage's `_Not executed in this path — ..._` part or section with `_Not yet completed_` before running it; run "End of Discovery" (core-workflow.md) again when finished.
+**If Discovery had already ended**: see "Reopening After Discovery Has Ended" below.
 
 **Considerations**:
 - Only stages on the current path can be added (see each stage's prerequisites); to use another path's stages, see "Switching the Starting Path"
@@ -91,7 +91,18 @@ Prototype & Validation / Prototype Building --> Product Strategy --> Go-to-Marke
    - Archive all affected artifacts
    - Reset all affected stages in `aiplc-state.md`
    - Return to the stage to restart and re-execute from that point forward
+   - If Discovery had already ended, follow "Reopening After Discovery Has Ended" below
 5. **Log Change**: Document full impact and reason for restart
+
+### Reopening After Discovery Has Ended
+
+Applies to sections 1 and 4 when **Current Stage** is `Discovery Complete` or `Ended`:
+1. Reopen the requested stage **and every later stage that depends on it** (see dependencies above) — for example, reopening Product Strategy also reopens Go-to-Market. Mark them `[ ]`, whether they were `[x]` or `[-]`.
+2. For each reopened stage, replace its part or section in `discovery-document.md` with `_Not yet completed_` (archive a completed one first).
+3. Set the document `Status` to `In Progress — [first reopened stage]` and **Current Stage** to that stage.
+4. **If Product Strategy is reopened**: ask which use case it is for — option A is the current selected use case (redo), followed by any **Strategy Candidates Not Covered** from the archived Part 4 — then set **Selected Use Case(s) for Strategy** and the document's `**Product**:` header to the answer. Carry the remaining candidates into the new Part 4.
+5. Run the reopened stages in order. Run "End of Discovery" (core-workflow.md) only after the last reopened stage finishes.
+
 
 **Considerations**:
 - Built prototypes may no longer match the new direction — ask whether to rebuild or keep them as reference

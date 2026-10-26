@@ -15,7 +15,7 @@
 • **Workspace Detection** (always) → **Check for PROTOTYPE-*.md** (priority) → **DISCOVERY PHASE** (3 entry points) → **Product Strategy** → **Go-to-Market** → **Discovery Document Complete**
 
 ## Discovery Phase Entry Points:
-• **Entry Point 1 (Highest Priority)**: PROTOTYPE-*.md files exist → Skip all discovery → Build prototypes directly
+• **Entry Point 1 (Highest Priority)**: PROTOTYPE-*.md files exist → Confirm they come from your team → Skip all discovery → Build prototypes directly
 • **Entry Point 2 (Path A)**: No PROTOTYPE-*.md → User chooses pain points → Envision → Solution Analysis → Single or Multiple solutions
 • **Entry Point 3 (Path B)**: No PROTOTYPE-*.md → User chooses use cases → Use Case Intake → Prioritization → Prototype Context Generation
 
@@ -108,6 +108,7 @@ flowchart TD
 
 #### Entry Point 1: Existing PROTOTYPE-*.md Files (Highest Priority)
 - Workspace Detection finds PROTOTYPE-*.md files in workspace
+- User confirms the files come from them or their team
 - Skip all discovery phases (pain points, PR/FAQ, use case intake, prioritization)
 - Jump directly to Prototype Building
 - Typical scenario: Workshop environment where teams receive pre-generated specifications

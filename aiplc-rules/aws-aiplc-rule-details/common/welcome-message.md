@@ -93,6 +93,7 @@ AI-PLC Discovery is a structured yet flexible product definition process that he
 
 **What happens**:
 - Workspace Detection finds PROTOTYPE-*.md files
+- You confirm the files come from you or your team
 - Skips all discovery phases
 - Jumps directly to Prototype Building
 - Builds prototypes from specifications

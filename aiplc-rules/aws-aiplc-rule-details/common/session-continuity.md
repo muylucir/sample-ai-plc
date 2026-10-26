@@ -17,7 +17,7 @@ Based on your aiplc-state.md, here's your current status:
 
 A) Continue where you left off ([Next step description])
 B) Review a previous stage ([Show available stages])
-C) Reopen a stage that was skipped or not executed ([Show those stages]) — only if Discovery has ended
+C) Reopen or redo a stage ([Show stages on the recorded path marked [x] or [-]; not stages of the other path]) — only if Discovery has ended
 X) Other (please describe after [Answer]: tag below)
 
 [Answer]: 
@@ -25,7 +25,7 @@ X) Other (please describe after [Answer]: tag below)
 
 ## MANDATORY: Session Continuity Instructions
 1. **Always read aiplc-state.md first** when detecting existing project
-2. **Parse current status** from the state file to populate the prompt. Resume from **Current Stage**; if it is missing, use the first `[ ]` stage that belongs to the recorded path. If **Current Stage** is `Discovery Complete` or `Ended`, there is nothing to continue: offer review, or reopening a `[-]` stage (option C) through "Adding a Skipped Stage" in `common/workflow-changes.md`
+2. **Parse current status** from the state file to populate the prompt. Resume from **Current Stage**; if it is missing, use the first `[ ]` stage that belongs to the recorded path. If **Current Stage** is `Discovery Complete` or `Ended`, there is nothing to continue: offer review, or reopening a stage (option C) through "Reopening After Discovery Has Ended" in `common/workflow-changes.md`
 3. **MANDATORY: Load Previous Stage Artifacts** - Before resuming any stage, automatically read all relevant artifacts from previous stages that exist in the workspace:
    - **All stages**: `discovery/discovery-document.md` (parts completed so far)
    - **Envision**: `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode)
