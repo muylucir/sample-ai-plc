@@ -191,12 +191,16 @@ What would you like to do next?
 
 ### If [B] - Stop here (handoff mode):
 - Confirm files are ready for sharing
-- Optionally continue to Product Strategy for one use case
-- End Discovery phase
+- Offer to continue to Product Strategy → GTM for one use case; if the user accepts, ask which one and record it as the selected use case in `aiplc-state.md`
+- Otherwise end the Discovery phase (mark remaining Discovery Document parts as not executed — see "Artifact Contract" in core-workflow.md)
 
 ### If [C] - Build specific prototypes:
 - Ask which ones to build
 - Proceed to `prototype-building.md` for selected ones
+
+## Write to Discovery Document and State
+
+Write **Part 3: Prototypes** in `discovery-document.md` with a **Prototype Specifications** section: one line per PROTOTYPE-*.md (use case, type, file path). Mark `Prototype Context Generation` as `[x]` in `aiplc-state.md`.
 
 ## Additional Context Files
 
@@ -247,5 +251,5 @@ This file will track iterations made to the prototype during building and valida
 ## Next Steps
 
 - If [A] → `prototype-building.md`
-- If [B] → Optional: Product Strategy, then end
+- If [B] → Optional: Product Strategy → GTM for the selected use case, then end
 - If [C] → `prototype-building.md` (for selected use cases)

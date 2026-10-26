@@ -455,7 +455,11 @@ Ready to move to Product Strategy for this use case?
 
 ## Step 4: Selection and Next Steps
 
-Record selected use case(s) and proceed to Product Strategy stage.
+1. Record the selected use case(s) in `aiplc-state.md` and mark `Prototype Building` as `[x]`
+2. In `discovery-document.md` (create it from the skeleton in "Artifact Contract", core-workflow.md, if it does not exist):
+   - Add a **Build Results** section to **Part 3: Prototypes** — per prototype: URL, status, iteration count, key changes, and the selection
+   - **Entry Point 1 only**: write Part 3's **Prototype Specifications** list too, and set Parts 1 and 2 to `_Not executed in this workspace — see the Use Case Overview in each PROTOTYPE-*.md_`; set **Entry Point / Path** to `Entry Point 1`
+3. Proceed to Product Strategy stage
 
 ## Audit Logging
 

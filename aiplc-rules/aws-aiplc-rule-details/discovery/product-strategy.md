@@ -7,31 +7,33 @@
 **Purpose**: Capture positioning, differentiation, and business model decisions. These are informed by the structured discovery work — validated pain points, market research, a PRFAQ that has been through stakeholder review, and optionally validated prototype feedback from real users — rather than assumptions.
 
 ## Prerequisites
-- Envision stage must be complete and approved
-- `aiplc-docs/discovery/discovery-document.md` must exist with Part 1 (Envision) populated
-- `aiplc-docs/discovery/envision/pain-point-analysis.md` must exist
-- If Prototype & Validation was executed: `aiplc-docs/discovery/prototype/validation-results.md` should exist
+- `aiplc-docs/discovery/discovery-document.md` must exist (create it from the skeleton in "Artifact Contract", core-workflow.md, if it does not)
+- A selected solution or use case recorded in `aiplc-state.md`. If none is recorded (for example, the user chose to hand off PROTOTYPE-*.md files), ask which one this strategy is for and record it before continuing
+
+Envision is **not** required — Path B and Entry Point 1 reach this stage without it.
 
 ## Execution Steps
 
 ### Step 1: Load Prior Discovery Context
 
-Load the following artifacts:
-- `aiplc-docs/discovery/discovery-document.md` (Parts 1 & 2 if Prototype & Validation was executed, or Part 1 only if skipped)
-- `aiplc-docs/discovery/envision/pain-point-analysis.md` (categorized pain points)
-- `aiplc-docs/discovery/prototype/validation-results.md` (if Prototype & Validation was executed)
+Load whichever of these exist (all paths relative to `aiplc-docs/discovery/`):
+- `discovery-document.md` (Parts 1-3)
+- `envision/pain-point-analysis.md` — Path A
+- `use-case-intake/use-cases.md` and `prioritization/scoring.md` — Path A.2, Path B
+- `prototypes/{selected-slug}/PROTOTYPE-{selected-slug}.md` and `iteration-log.md` — Entry Point 1, Path A.2, Path B
+- `prototypes/{solution-slug}/validation-results.md` — Path A.1
 
-Use these to inform all Product Strategy decisions. Every question and recommendation should be grounded in the validated pain points, PRFAQ, and prototype feedback (if available), not assumptions.
+Use these to inform all Product Strategy decisions. Every question and recommendation should be grounded in the evidence that exists, not assumptions.
 
-**If Prototype & Validation was executed**: Strategy questions should reference specific validation findings (e.g., "Users validated that X is the top pain point" or "3 of 5 users requested Y"). This grounds strategy in evidence rather than assumptions.
+**If validation results exist**: Strategy questions should reference specific validation findings (e.g., "Users validated that X is the top pain point" or "3 of 5 users requested Y").
 
-**If Prototype & Validation was skipped**: Strategy is based on Envision findings only. Note this limitation where relevant.
+**If there is no pain point analysis** (Path B, Entry Point 1): Draw defaults from the use case and prototype specification. State in the questions and in Part 4 that positioning, pricing, and willingness-to-pay are assumptions not yet backed by customer research.
 
 ### Step 2: Gather Product Strategy Inputs
 
 Create `aiplc-docs/discovery/product-strategy/strategy-questions.md` with questions covering the areas below.
 
-**CRITICAL — Intelligent Defaults**: Every question MUST include an intelligent default as Option A, drawn from the Envision context (pain point analysis + PRFAQ). The PM confirms or overrides rather than writing from scratch.
+**CRITICAL — Intelligent Defaults**: Every question MUST include an intelligent default as Option A, drawn from the context loaded in Step 1. The PM confirms or overrides rather than writing from scratch.
 
 **MANDATORY question areas:**
 
@@ -81,12 +83,10 @@ DO NOT proceed until all strategy questions are answered and validated.
 
 ### Step 3: Write Product Strategy to Living Document
 
-Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
+Write **Part 4: Product Strategy** in `aiplc-docs/discovery/discovery-document.md`:
 
 ```markdown
----
-
-# Part 2: Product Strategy
+# Part 4: Product Strategy
 
 ## Positioning
 - **Market Position**: [Premium/Budget/Niche/Platform]
@@ -123,10 +123,7 @@ Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
 - **Product-Market Fit Signal**: [What PMF looks like for this product]
 ```
 
-Update the document status header:
-```markdown
-**Status**: In Progress — Envision Complete, Product Strategy Complete
-```
+Update the document status header to `**Status**: In Progress — Product Strategy`.
 
 ### Step 4: Present Product Strategy Completion
 
@@ -140,7 +137,7 @@ Update the document status header:
 - **Primary Differentiator**: [Top differentiator]
 
 ## Artifacts Updated
-- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 2: Product Strategy added)
+- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 4: Product Strategy)
 - `aiplc-docs/discovery/product-strategy/strategy-questions.md` — Strategy questions with answers
 
 ## Next Step
@@ -154,16 +151,7 @@ DO NOT proceed to Go-to-Market until the user explicitly approves the Product St
 
 ### Step 5: Update State Tracking
 
-Update `aiplc-docs/aiplc-state.md`:
-
-```markdown
-## Stage Progress
-### 🟣 DISCOVERY PHASE
-- [x] Envision
-- [x] Prototype & Validation (or skipped)
-- [x] Product Strategy
-- [ ] Go-to-Market
-```
+In `aiplc-docs/aiplc-state.md`, mark `Product Strategy` as `[x]`.
 
 ### Step 6: Log and Proceed
 

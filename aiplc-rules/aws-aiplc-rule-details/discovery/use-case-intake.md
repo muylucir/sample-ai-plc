@@ -7,6 +7,8 @@ Gather and document all use cases from the user for prioritization.
 - Path B: User selected "I already have use cases" in discovery mode selection
 - Path A.2: Multiple solutions identified from PR/FAQ analysis
 
+**Path A.2 (pre-filled)**: Use the solutions in `solution-analysis/identified-solutions.md` as the use case list. Skip Steps 1-2, fill in the fields from the identified solutions (ask only for fields that are missing), and go straight to the confirmation in "Flexible Input Formats".
+
 ## Step 1: Determine Number of Use Cases
 
 Ask:
@@ -140,6 +142,12 @@ Create file: `aiplc-docs/discovery/use-case-intake/use-cases.md`
 ## Next Steps
 Proceed to Use Case Prioritization
 ```
+
+## Step 5: Write to Discovery Document and State
+
+- **Path B**: Create `aiplc-docs/discovery/discovery-document.md` from the skeleton in "Artifact Contract" (core-workflow.md) if it does not exist, and write **Part 1: Problem & Opportunity** as a use case summary (name, type, problem solved, target users for each use case). Set **Entry Point / Path** to `Path B`.
+- **Path A.2**: Part 1 already holds the PR/FAQ — do not overwrite it.
+- Mark `Use Case Intake` as `[x]` in `aiplc-state.md`.
 
 ## Audit Logging
 

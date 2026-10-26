@@ -155,7 +155,7 @@ Load `discovery/solution-analysis.md`
 **Branch A.2: Multiple Solutions**
 - PR/FAQ suggests N different solution options
 - Extract use cases from PR/FAQ
-- **MERGE WITH PATH B** at Use Case Prioritization
+- **MERGE WITH PATH B** at Use Case Intake (pre-filled from the identified solutions — the user confirms instead of re-entering them), then Use Case Prioritization
 
 ---
 
@@ -212,7 +212,7 @@ What would you like to do next?
 ```
 
 **If [A] - Build now**: Proceed to Prototype Building
-**If [B] - Hand off**: End Discovery, optionally continue to Product Strategy
+**If [B] - Hand off**: Optionally continue to Product Strategy → GTM for one use case (ask which and record it as the selected use case); otherwise end Discovery
 **If [C] - Build specific**: Ask which ones, proceed to Prototype Building
 
 ---
@@ -223,8 +223,9 @@ Load `discovery/prototype-building.md`
 
 **Execute IF**:
 - Entry Point 1: PROTOTYPE-*.md files found
-- Path A.1: Single solution from PR/FAQ
 - Path A.2 or Path B: User chose to build prototypes
+
+(Path A.1 builds its single prototype in Prototype & Validation instead.)
 
 **Execution**:
 1. For each PROTOTYPE-*.md file:
@@ -240,7 +241,7 @@ Load `discovery/prototype-building.md`
 
 ### Selection (if multiple prototypes)
 
-If multiple prototypes built, ask user to select winner for Product Strategy
+If multiple prototypes built, ask user to select winner for Product Strategy. Record the selection in `aiplc-state.md`.
 
 ---
 
@@ -276,12 +277,7 @@ Load `discovery/go-to-market.md`
 
 **Output**: `aiplc-docs/discovery/discovery-document.md`
 
-This comprehensive document contains:
-- Pain points and PR/FAQ (if Path A)
-- Use cases and prioritization (if Path B)
-- Prototype specifications (PROTOTYPE-*.md files)
-- Product Strategy
-- Go-to-Market plan
+This comprehensive document contains the five parts defined in **Artifact Contract** below. Parts that a path does not produce are marked as not executed, so every Discovery Document has the same structure.
 
 **Next Steps for Developers**:
 This Discovery Document will be provided to developers in a separate workspace for:
@@ -323,11 +319,15 @@ This Discovery Document will be provided to developers in a separate workspace f
 ```
 aiplc-docs/
 ├── discovery/
-│   ├── discovery-document.md          # Main output
+│   ├── discovery-document.md          # Main output (all paths)
 │   ├── envision/                      # Path A
-│   │   ├── pain-points.md
-│   │   └── prfaq.md
-│   ├── solution-analysis/             # Path A (if multiple)
+│   │   ├── business-context-questions.md
+│   │   ├── mode-selection-questions.md
+│   │   ├── pain-point-questions.md    # Interactive / hybrid mode
+│   │   ├── pain-points-from-url.md    # URL / hybrid mode
+│   │   ├── pain-point-analysis.md
+│   │   └── prfaq-clarifying-questions.md  # If needed
+│   ├── solution-analysis/             # Path A
 │   │   └── identified-solutions.md
 │   ├── use-case-intake/               # Path B or Path A.2
 │   │   └── use-cases.md
@@ -336,20 +336,104 @@ aiplc-docs/
 │   │   ├── scoring.md
 │   │   └── ranking.md
 │   ├── prototypes/                    # All paths
-│   │   ├── {use-case-1-slug}/
-│   │   │   ├── PROTOTYPE-{use-case-1-slug}.md  ★ Shareable
+│   │   ├── {use-case-slug}/           # Entry Point 1, Path A.2, Path B
+│   │   │   ├── PROTOTYPE-{use-case-slug}.md  ★ Shareable
 │   │   │   ├── design-context.md
 │   │   │   └── iteration-log.md
-│   │   ├── {use-case-2-slug}/
-│   │   │   └── PROTOTYPE-{use-case-2-slug}.md  ★ Shareable
-│   │   └── {use-case-3-slug}/
-│   │       └── PROTOTYPE-{use-case-3-slug}.md  ★ Shareable
+│   │   └── {solution-slug}/           # Path A.1 (Prototype & Validation)
+│   │       ├── prototype-spec.md
+│   │       ├── design-context.md
+│   │       ├── build-instructions.md
+│   │       ├── iteration-log.md
+│   │       ├── validation-plan.md
+│   │       └── validation-results.md
 │   ├── product-strategy/
-│   │   └── strategy.md
+│   │   └── strategy-questions.md
 │   └── go-to-market/
-│       └── gtm-plan.md
+│       └── gtm-questions.md
 ├── aiplc-state.md
 └── audit.md
+```
+
+## Artifact Contract
+
+### Discovery Document Parts
+
+`aiplc-docs/discovery/discovery-document.md` always has the same five parts, whichever path ran. The first stage that writes to it creates the file from the skeleton below; every later stage writes **only its own part** (replacing it if the stage is re-run) and updates the `Status` line.
+
+```markdown
+# Discovery Document
+
+**Product**: [Product or selected use case name]
+**Date**: [ISO date]
+**Entry Point / Path**: [Entry Point 1 / Path A.1 / Path A.2 / Path B]
+**Status**: In Progress — [last completed stage] | Complete
+
+---
+
+# Part 1: Problem & Opportunity
+_Not yet completed_
+
+---
+
+# Part 2: Solution Selection
+_Not yet completed_
+
+---
+
+# Part 3: Prototypes
+_Not yet completed_
+
+---
+
+# Part 4: Product Strategy
+_Not yet completed_
+
+---
+
+# Part 5: Go-to-Market
+_Not yet completed_
+```
+
+When Discovery ends (after Go-to-Market, or when the user ends at handoff), replace any remaining `_Not yet completed_` with `_Not executed in this path — [reason]_`.
+
+### Stage Inputs and Outputs
+
+| Stage | Runs in | Requires | Produces | Writes Part |
+|---|---|---|---|---|
+| Envision | Path A | — | `envision/pain-point-analysis.md` | 1 (pain points, PR/FAQ) |
+| Solution Analysis | Path A | Part 1 (PR/FAQ) | `solution-analysis/identified-solutions.md` | 2 (identified solutions) |
+| Use Case Intake | Path B, A.2 | — (A.2: `identified-solutions.md`) | `use-case-intake/use-cases.md` | 1 (Path B: use case summary) |
+| Use Case Prioritization | Path B, A.2 | `use-cases.md` | `prioritization/*.md` | 2 (ranking, selection) |
+| Prototype Context Generation | Path B, A.2 | `ranking.md` | `prototypes/{slug}/PROTOTYPE-{slug}.md` | 3 (specifications) |
+| Prototype Building | Entry Point 1, Path B, A.2 | PROTOTYPE-*.md | prototype code, `iteration-log.md` | 3 (build results, selection); Entry Point 1 also writes Parts 1-2 as not executed |
+| Prototype & Validation | Path A.1 | Part 1, `identified-solutions.md` | `prototypes/{solution-slug}/*` | 3 (prototype, validation, build decision) |
+| Product Strategy | All paths | Part 3 or a selected use case | `product-strategy/strategy-questions.md` | 4 |
+| Go-to-Market | All paths | Part 4 | `go-to-market/gtm-questions.md` | 5 |
+
+All paths are relative to `aiplc-docs/discovery/`. A stage must not require an artifact that its path does not produce; when an optional input is absent, the stage states the limitation instead of stopping.
+
+### State File
+
+`aiplc-docs/aiplc-state.md` uses one Stage Progress block for every path. Each stage updates **only its own line**: `[x]` complete, `[ ]` pending, `[-]` not applicable to this path or skipped (add the reason).
+
+```markdown
+## Stage Progress
+- **Entry Point / Path**: [Entry Point 1 / Path A.1 / Path A.2 / Path B]
+- **Selected Use Case(s)**: [Names, or "Not yet selected"]
+
+### 🟣 DISCOVERY PHASE
+- [ ] Workspace Detection
+- [ ] Discovery Mode Selection
+- [ ] Envision
+- [ ] Solution Analysis
+- [ ] Use Case Intake
+- [ ] Use Case Prioritization
+- [ ] Prototype Context Generation
+- [ ] Prototype Building
+- [ ] Prototype & Validation
+- [ ] Product Strategy
+- [ ] Go-to-Market
 ```
 
 ## Success Criteria
@@ -367,6 +451,5 @@ When Discovery is complete, provide developers with:
 1. Complete `aiplc-docs/discovery/` directory
 2. Especially `discovery-document.md` (main artifact)
 3. All PROTOTYPE-*.md files (if generated)
-4. Product Strategy and GTM documents
 
 Developers will use these in their workspace for Inception and Construction phases.

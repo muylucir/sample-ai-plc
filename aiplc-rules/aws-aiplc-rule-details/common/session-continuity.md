@@ -25,14 +25,15 @@ B) Review a previous stage ([Show available stages])
 1. **Always read aiplc-state.md first** when detecting existing project
 2. **Parse current status** from the state file to populate the prompt
 3. **MANDATORY: Load Previous Stage Artifacts** - Before resuming any stage, automatically read all relevant artifacts from previous stages that exist in the workspace:
-   - **Envision**: `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode), `discovery/discovery-document.md` (Part 1)
+   - **All stages**: `discovery/discovery-document.md` (parts completed so far)
+   - **Envision**: `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode)
    - **Solution Analysis**: `discovery/solution-analysis/identified-solutions.md`
    - **Use Case Intake**: `discovery/use-case-intake/use-cases.md`
    - **Use Case Prioritization**: `discovery/prioritization/scoring.md`, `discovery/prioritization/ranking.md`
    - **Prototype Context Generation / Prototype Building**: `discovery/prototypes/*/PROTOTYPE-*.md`, `design-context.md`, `iteration-log.md`
-   - **Prototype & Validation**: `discovery/prototype/prototype-spec.md`, `design-context.md`, `build-instructions.md`, `iteration-log.md`, `validation-plan.md`, `validation-results.md`
-   - **Product Strategy**: `discovery/discovery-document.md`, `discovery/product-strategy/strategy-questions.md`
-   - **Go-to-Market**: `discovery/discovery-document.md`, `discovery/go-to-market/gtm-questions.md`
+   - **Prototype & Validation**: `discovery/prototypes/{solution-slug}/prototype-spec.md`, `design-context.md`, `build-instructions.md`, `iteration-log.md`, `validation-plan.md`, `validation-results.md`
+   - **Product Strategy**: `discovery/product-strategy/strategy-questions.md`
+   - **Go-to-Market**: `discovery/go-to-market/gtm-questions.md`
    - All paths above are relative to `aiplc-docs/`
 4. **Load only what the current stage needs**: Earlier-stage artifacts that feed the current stage, plus the current stage's own working files. Do not load prototype source code unless resuming Prototype Building or iteration.
 5. **Adapt options** based on the recorded path and stage

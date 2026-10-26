@@ -18,8 +18,11 @@
 
 ## Prerequisites
 - Envision stage must be complete and approved
-- `aiplc-docs/discovery/discovery-document.md` must exist with Part 1 (Envision) populated
+- `aiplc-docs/discovery/discovery-document.md` must exist with Part 1 (Problem & Opportunity) populated
 - `aiplc-docs/discovery/envision/pain-point-analysis.md` must exist
+- A single solution selected in Solution Analysis (recorded in `aiplc-state.md`)
+
+`{solution-slug}` is the kebab-case name of the selected solution (same slug rules as `prototype-context-generation.md`).
 
 ## AI Behavior
 The AI acts as a prototype strategist — translating Envision artifacts into a buildable spec, guiding design decisions, structuring validation, and synthesizing feedback. The AI does NOT ask the PM to write code or make technical decisions. The PM makes product decisions; the AI handles everything else.
@@ -29,10 +32,11 @@ The AI acts as a prototype strategist — translating Envision artifacts into a 
 ### Step 1: Generate Prototype Specification
 
 Load Envision context:
-- `aiplc-docs/discovery/discovery-document.md` (Part 1: Envision)
+- `aiplc-docs/discovery/discovery-document.md` (Parts 1 and 2)
 - `aiplc-docs/discovery/envision/pain-point-analysis.md`
+- `aiplc-docs/discovery/solution-analysis/identified-solutions.md`
 
-The AI derives the prototype scope from the Envision artifacts — not from a blank prompt. Create `aiplc-docs/discovery/prototype/prototype-spec.md`:
+The AI derives the prototype scope from the Envision artifacts — not from a blank prompt. Create `aiplc-docs/discovery/prototypes/{solution-slug}/prototype-spec.md`:
 
 ```markdown
 # Prototype Specification
@@ -99,7 +103,7 @@ DO NOT proceed until the user confirms the prototype scope.
 
 ### Step 2: Design Context
 
-Create `aiplc-docs/discovery/prototype/design-context.md` with questions:
+Create `aiplc-docs/discovery/prototypes/{solution-slug}/design-context.md` with questions:
 
 ```markdown
 # Prototype Design Context
@@ -166,7 +170,7 @@ DO NOT proceed until all design context questions are answered.
 
 ### Step 3: Build Prototype
 
-Generate `aiplc-docs/discovery/prototype/build-instructions.md`:
+Generate `aiplc-docs/discovery/prototypes/{solution-slug}/build-instructions.md`:
 
 This file combines the prototype spec (Step 1) and design context (Step 2) into build instructions for the AI agent.
 
@@ -303,7 +307,7 @@ For each change request, the AI agent:
 2. Describes what will change (functional and/or visual)
 3. Waits for PM approval
 4. Applies the change
-5. Logs the iteration in `aiplc-docs/discovery/prototype/iteration-log.md`
+5. Logs the iteration in `aiplc-docs/discovery/prototypes/{solution-slug}/iteration-log.md`
 
 ```markdown
 ## Iteration [Number]
@@ -331,7 +335,7 @@ B) I want to make more changes
 
 ### Step 5: Validation Setup
 
-Create `aiplc-docs/discovery/prototype/validation-plan.md`:
+Create `aiplc-docs/discovery/prototypes/{solution-slug}/validation-plan.md`:
 
 ```markdown
 # Validation Plan
@@ -395,7 +399,7 @@ Wait for the user to return with feedback data. DO NOT proceed until the user pr
 
 ### Step 6: Feedback Import and Synthesis
 
-When the user returns with feedback, synthesize it and create `aiplc-docs/discovery/prototype/validation-results.md`:
+When the user returns with feedback, synthesize it and create `aiplc-docs/discovery/prototypes/{solution-slug}/validation-results.md`:
 
 ```markdown
 # Validation Results
@@ -504,15 +508,13 @@ X) Other (please describe after [Answer]: tag below)
 
 ### Step 8: Write to Living Document
 
-Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
+Write **Part 3: Prototypes** in `aiplc-docs/discovery/discovery-document.md`:
 
 ```markdown
----
-
-# Part 2: Prototype & Validation
+# Part 3: Prototypes
 
 ## Prototype Spec
-[Summary referencing full spec in prototype/prototype-spec.md]
+[Summary referencing full spec in prototypes/{solution-slug}/prototype-spec.md]
 - **Features built**: [List]
 - **Design approach**: [Clean modern / Organization brand / Matching [product] / Minimal]
 - **Device target**: [Desktop / Mobile / Responsive]
@@ -523,7 +525,7 @@ Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
 - **Iterations**: [Count] — [Summary of key changes]
 
 ## Validation Results
-[Summary referencing full results in prototype/validation-results.md]
+[Summary referencing full results in prototypes/{solution-slug}/validation-results.md]
 - **Users**: [Count] | **Duration**: [Days] | **Feedback items**: [Count]
 - **Pain points validated**: [X of Y]
 - **Top user requests**: [List]
@@ -534,10 +536,7 @@ Append Part 2 to `aiplc-docs/discovery/discovery-document.md`:
 - **Recommendations for Developer Handoff**: [Features to add, modify, or remove based on validation]
 ```
 
-Update the document status header:
-```markdown
-**Status**: In Progress — Envision Complete, Prototype & Validation Complete
-```
+Update the document status header to `**Status**: In Progress — Prototype & Validation`.
 
 ### Step 9: Present Completion
 
@@ -550,13 +549,13 @@ Update the document status header:
 **Build Decision**: [PROCEED / ITERATE / PIVOT / KILL]
 
 ## Artifacts Created
-- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 2: Prototype & Validation added)
-- `aiplc-docs/discovery/prototype/prototype-spec.md` — Prototype specification
-- `aiplc-docs/discovery/prototype/design-context.md` — Design context and brand guidelines
-- `aiplc-docs/discovery/prototype/build-instructions.md` — Build instructions for AI agent
-- `aiplc-docs/discovery/prototype/iteration-log.md` — Iteration history
-- `aiplc-docs/discovery/prototype/validation-plan.md` — Validation plan
-- `aiplc-docs/discovery/prototype/validation-results.md` — Validation results and synthesis
+- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 3: Prototypes)
+- `aiplc-docs/discovery/prototypes/{solution-slug}/prototype-spec.md` — Prototype specification
+- `aiplc-docs/discovery/prototypes/{solution-slug}/design-context.md` — Design context and brand guidelines
+- `aiplc-docs/discovery/prototypes/{solution-slug}/build-instructions.md` — Build instructions for AI agent
+- `aiplc-docs/discovery/prototypes/{solution-slug}/iteration-log.md` — Iteration history
+- `aiplc-docs/discovery/prototypes/{solution-slug}/validation-plan.md` — Validation plan
+- `aiplc-docs/discovery/prototypes/{solution-slug}/validation-results.md` — Validation results and synthesis
 
 ## Next Step
 Proceeding to **Product Strategy** to capture positioning, differentiation, and business model decisions — informed by validated prototype and real user feedback.
@@ -569,16 +568,7 @@ DO NOT proceed to Product Strategy until the user explicitly approves.
 
 ### Step 10: Update State Tracking
 
-Update `aiplc-docs/aiplc-state.md`:
-
-```markdown
-## Stage Progress
-### 🟣 DISCOVERY PHASE
-- [x] Envision
-- [x] Prototype & Validation
-- [ ] Product Strategy
-- [ ] Go-to-Market
-```
+In `aiplc-docs/aiplc-state.md`, mark `Prototype & Validation` as `[x]`.
 
 ### Step 11: Log and Proceed
 

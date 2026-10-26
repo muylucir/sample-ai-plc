@@ -68,7 +68,7 @@ flowchart TD
     
     ENV --> SOL
     SOL -->|Single Solution| PV
-    SOL -->|Multiple Solutions| UCP
+    SOL -->|Multiple Solutions| UCI
     
     UCI --> UCP
     UCP --> PCG
@@ -117,7 +117,7 @@ flowchart TD
 - Envision: Gather customer pain points, generate PR/FAQ using Working Backwards
 - Solution Analysis: Determine single solution or multiple solutions
   - Single solution → Prototype & Validation (existing flow)
-  - Multiple solutions → Use Case Prioritization → Prototype Context Generation
+  - Multiple solutions → Use Case Intake (pre-filled) → Use Case Prioritization → Prototype Context Generation
 - Product Strategy: Positioning, differentiation, business model
 - Go-to-Market: Marketing strategy, sales approach, launch planning
 

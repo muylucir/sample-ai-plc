@@ -252,20 +252,14 @@ If clarifying questions were created, DO NOT finalize the PRFAQ until all answer
 
 ### Step 5: Write PRFAQ to Living Document
 
-Create `aiplc-docs/discovery/discovery-document.md` and write the Envision section:
+Create `aiplc-docs/discovery/discovery-document.md` from the skeleton in "Artifact Contract" (core-workflow.md) if it does not exist yet, then write **Part 1: Problem & Opportunity**:
 
 **CRITICAL**: Use the PR/FAQ format exactly as defined below. Do NOT deviate from this structure. Template has headers for FYI, actual created file wont have those headers explaining the content, so please dont show them.
 
+Set the header `**Status**: In Progress — Envision`.
+
 ```markdown
-# Discovery Document
-
-**Product**: [Product Name]
-**Date**: [ISO date]
-**Status**: In Progress — Envision Complete
-
----
-
-# Part 1: Envision
+# Part 1: Problem & Opportunity
 
 ## Pain Point Analysis Summary
 [Brief summary referencing the full analysis in envision/pain-point-analysis.md]
@@ -397,7 +391,7 @@ A: [Answer]
 [Brief summary of the key pain points and proposed product vision from the PRFAQ]
 
 ## Artifacts Created
-- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 1: Envision)
+- `aiplc-docs/discovery/discovery-document.md` — Living document (Part 1: Problem & Opportunity)
 - `aiplc-docs/discovery/envision/pain-point-analysis.md` — Categorized pain point analysis
 - `aiplc-docs/discovery/envision/mode-selection-questions.md` — Mode selection
 - [Additional artifacts based on mode used]
@@ -410,20 +404,11 @@ Proceeding to **Solution Analysis** to determine if the PRFAQ suggests a single 
 
 ### ⛔ GATE: Await User Approval
 DO NOT proceed to Solution Analysis until the user explicitly approves the Envision output.
-**MANDATORY AUDIT**: Log user approval of Envision output to `aiplc-docs/audit.md` with timestamp. Include: approval status, any changes requested. Update `aiplc-state.md` to mark Envision as complete.
+**MANDATORY AUDIT**: Log user approval of Envision output to `aiplc-docs/audit.md` with timestamp. Include: approval status, any changes requested.
 
 ### Step 7: Update State Tracking
 
-Update `aiplc-docs/aiplc-state.md`:
-
-```markdown
-## Stage Progress
-### 🟣 DISCOVERY PHASE
-- [x] Envision
-- [ ] Solution Analysis
-- [ ] Product Strategy
-- [ ] Go-to-Market
-```
+In `aiplc-docs/aiplc-state.md`, mark `Envision` as `[x]` and set **Entry Point / Path** to `Path A`.
 
 ### Step 8: Log and Proceed
 

@@ -76,11 +76,9 @@ Create `aiplc-docs/aiplc-state.md`:
 
 ## Session Information
 - **Start Date**: [ISO timestamp]
-- **Entry Point**: [Entry Point 1 / To be selected]
 - **Current Stage**: Workspace Detection
 
-## Stage Progress
-[Will be populated as workflow progresses]
+[Stage Progress block — copy from "State File" in core-workflow.md, with Workspace Detection marked [x]]
 ```
 
 ## Step 5: Present Completion Message

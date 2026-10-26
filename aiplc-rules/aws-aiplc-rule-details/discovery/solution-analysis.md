@@ -58,7 +58,7 @@ I'll proceed to prototype this solution.
 Continue to prototype? [Yes/No]
 ```
 
-If Yes → Proceed to `prototype-validation.md` (existing single prototype flow)
+If Yes → Record the solution as the selected use case and **Path A.1** in `aiplc-state.md`, then proceed to `prototype-validation.md` (single prototype flow)
 
 ### Branch A.2: Multiple Solutions Identified
 
@@ -91,8 +91,8 @@ Would you like to prioritize these and prototype the top 3?
 [Answer]:
 ```
 
-If [A] → Proceed to `use-case-prioritization.md`
-If [B] → Ask which solution, then proceed to `prototype-validation.md`
+If [A] → Record **Path A.2** in `aiplc-state.md`, then proceed to `use-case-intake.md` with the identified solutions pre-filled (the user confirms or edits them instead of re-entering them), then `use-case-prioritization.md`
+If [B] → Ask which solution, record it as the selected use case and **Path A.1**, then proceed to `prototype-validation.md`
 
 ## Document Solutions
 
@@ -102,7 +102,7 @@ Create file: `aiplc-docs/discovery/solution-analysis/identified-solutions.md`
 # Identified Solutions from PR/FAQ
 
 **Analysis Date**: {timestamp}
-**PR/FAQ**: See envision/prfaq.md
+**PR/FAQ**: See discovery-document.md, Part 1
 
 ## Solutions Identified
 
@@ -122,6 +122,10 @@ Create file: `aiplc-docs/discovery/solution-analysis/identified-solutions.md`
 {Path A.1 or Path A.2}
 ```
 
+## Write to Discovery Document
+
+Write **Part 2: Solution Selection** in `aiplc-docs/discovery/discovery-document.md`: the identified solutions (name, type, pain points addressed) and the determination (single or multiple). Use Case Prioritization adds its ranking to this part on Path A.2. Mark `Solution Analysis` as `[x]` in `aiplc-state.md`.
+
 ## Audit Logging
 
 ```markdown
@@ -135,4 +139,4 @@ Create file: `aiplc-docs/discovery/solution-analysis/identified-solutions.md`
 ## Next Steps
 
 - Single Solution → `prototype-validation.md`
-- Multiple Solutions → `use-case-prioritization.md`
+- Multiple Solutions → `use-case-intake.md` (pre-filled) → `use-case-prioritization.md`
