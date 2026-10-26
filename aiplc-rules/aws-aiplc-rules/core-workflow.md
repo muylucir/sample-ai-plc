@@ -22,6 +22,7 @@ Rule details location: `./aws-aiplc-rule-details/`
 - Load `common/session-continuity.md` for session resumption guidance
 - Load `common/content-validation.md` for content validation requirements
 - Load `common/question-format-guide.md` for question formatting rules
+- Load `common/security-guardrails.md` for URL fetching, input file, prototype execution, and credential rules (apply to every stage and path)
 - Reference these throughout the workflow execution
 
 **On-demand Rules**: Load only when the situation arises:
@@ -307,7 +308,7 @@ This Discovery Document will be provided to developers in a separate workspace f
 - Log every interaction with timestamp
 - Use ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ)
 
-**NEVER log the following in audit.md:**
+**NEVER log the following in audit.md** (see also `common/security-guardrails.md`)**:**
 - API keys, tokens, or secrets of any kind
 - AWS credentials (access keys, secret keys, bearer tokens)
 - Any value that appears to be a credential (strings starting with `AKIA`, `sk-`, `bedrock-api-key-`, `goog_`, etc.)

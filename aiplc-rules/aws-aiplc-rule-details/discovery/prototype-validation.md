@@ -141,7 +141,7 @@ Provide any of the following that you have. Leave blank what you don't have.
 ## Question 2: Reference Product
 What product or tool should this feel similar to?
 
-A) I will provide a URL — the AI will analyze the visual style
+A) I will provide a URL — the AI will analyze the visual style (fetched under `common/security-guardrails.md`)
 B) Name a well-known product (e.g., "Salesforce-like", "Notion-like", "Jira-like", "AWS Console-like", "Slack-like")
 X) Other (please describe after [Answer]: tag below)
 
@@ -180,7 +180,8 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 **Context**: This is a rapid prototype for validation — NOT production code.
 
 **Optimize for**: Speed, working UI, core workflow completeness
-**Deprioritize**: Security hardening, error handling edge cases, scalability, code quality, extensive test coverage
+**Deprioritize**: Production hardening, error handling edge cases, scalability, code quality, extensive test coverage
+**Always apply**: `common/security-guardrails.md` (local only, isolated environment, credential rules)
 
 ## Features to Implement
 [From prototype-spec.md — numbered list with acceptance criteria]
@@ -234,9 +235,8 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 
 ## Technical Guidance
 - Use the simplest technology stack that works
-- Prefer local-first storage (SQLite, file-based, in-memory) unless cloud deployment is configured
-- If cloud deployment is available (AWS credentials, Amplify, CDK), deploy and provide URL
-- If cloud deployment is not available, provide local run instructions
+- Use local-first storage (SQLite, file-based, in-memory)
+- Run locally and provide local run instructions — do not deploy to cloud, even if credentials or deployment tooling are available
 - Frontend: lightweight framework or plain HTML/CSS/JS
 - Backend: single service, minimal dependencies
 - Tests: happy path only — enough to verify core flows work
@@ -248,20 +248,16 @@ The AI agent reads `build-instructions.md` and generates the application code in
 
 - No detailed functional, non-functional, or infrastructure design — that happens in the developer workspace
 - Minimal test coverage (happy path only)
-- No security hardening
-- No performance optimization
+- No production hardening or performance optimization (the rules in `common/security-guardrails.md` still apply)
 
-**If deployment is available** (AWS credentials configured, Amplify/CDK available): deploy and provide URL.
-
-**If deployment is not available**: provide local run instructions only. Prototypes run on localhost and must NOT be exposed to external networks via tunneling (ngrok, localtunnel, etc.) — they have access to the user's API credentials via environment variables and have no authentication layer.
+**Run locally only**: provide local run instructions. Prototypes run on localhost and must NOT be deployed to cloud or exposed to external networks via tunneling (ngrok, localtunnel, etc.) — they have access to the user's API credentials via environment variables and have no authentication layer. Sharing with validation users happens through demos the PM runs, not a public URL.
 
 Present completion:
 
 ```markdown
 # Prototype Built
 
-[If deployed]: Your prototype is live at: [URL]
-[If local]: Run with: `[command]` — accessible at http://localhost:[port]
+Run with: `[command]` — accessible at http://localhost:[port]
 
 **Design**: [Clean modern / Organization brand / Matching [product] / Minimal]
 **Device**: [Desktop / Mobile / Responsive]
@@ -345,7 +341,7 @@ How will you collect feedback from target users?
 
 A) I will conduct interviews or demos and report findings here
 B) I will send a survey and import results
-C) I will share the prototype link and collect informal feedback
+C) I will demo the prototype informally (screen share or in person) and collect feedback
 D) I have analytics or usage data I can import
 E) A combination of the above
 X) Other (please describe after [Answer]: tag below)
@@ -521,7 +517,7 @@ Write **Part 3: Prototypes** in `aiplc-docs/discovery/discovery-document.md`:
 
 ## Build Approach
 - **Technology**: [Stack used by the AI agent]
-- **Deployment**: [URL if deployed / Local if not]
+- **Run**: [Local run command]
 - **Iterations**: [Count] — [Summary of key changes]
 
 ## Validation Results
@@ -543,7 +539,7 @@ Update the document status header to `**Status**: In Progress — Prototype & Va
 ```markdown
 # Prototype & Validation Stage Complete
 
-**Prototype**: [Deployed URL or local path]
+**Prototype**: [Local run command and path]
 **Design**: [Approach used]
 **Validation**: [X] users, [Y] days, [Z] feedback items
 **Build Decision**: [PROCEED / ITERATE / PIVOT / KILL]

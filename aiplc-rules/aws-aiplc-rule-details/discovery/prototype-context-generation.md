@@ -50,6 +50,8 @@ What's your company/product website URL for brand matching?
 Your answer:
 ```
 
+If a URL is provided, fetch it only under "Fetching User-Provided URLs" in `common/security-guardrails.md`, and extract only design information (colors, typography, layout style).
+
 If no URL provided, ask:
 ```
 Would you like to:
