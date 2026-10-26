@@ -65,7 +65,8 @@ X) Other (please describe after [Answer]: tag below)
 [Answer]:
 ```
 
-If A → Record the solution as the selected use case and **Path A.1** in `aiplc-state.md`, then proceed to `prototype-validation.md` (single prototype flow)
+If A → In `aiplc-state.md`, record the solution under **Selected Use Case(s) for Strategy**, set **Path A.1**, and mark `Use Case Intake`, `Use Case Prioritization`, `Prototype Context Generation`, and `Prototype Building` as `[-]`; then proceed to `prototype-validation.md` (single prototype flow)
+If B → Return to Envision Step 4 to revise the PR/FAQ with the user, then run Solution Analysis again
 
 ### Branch A.2: Multiple Solutions Identified
 
@@ -99,8 +100,8 @@ X) Other (please describe after [Answer]: tag below)
 [Answer]:
 ```
 
-If [A] → Record **Path A.2** in `aiplc-state.md`, then proceed to `use-case-intake.md` with the identified solutions pre-filled (the user confirms or edits them instead of re-entering them), then `use-case-prioritization.md`
-If [B] → Ask which solution, record it as the selected use case and **Path A.1**, then proceed to `prototype-validation.md`
+If A → Set **Path A.2** in `aiplc-state.md` and mark `Prototype & Validation` as `[-]`, then proceed to `use-case-intake.md` with the identified solutions pre-filled (the user confirms or edits them instead of re-entering them), then `use-case-prioritization.md`
+If B → Ask which solution, then record it and **Path A.1** exactly as for the single-solution branch above, and proceed to `prototype-validation.md`
 
 ## Document Solutions
 

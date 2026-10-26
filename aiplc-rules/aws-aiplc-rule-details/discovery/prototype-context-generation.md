@@ -191,7 +191,13 @@ X) Other (please describe after [Answer]: tag below)
 [Answer]:
 ```
 
+## Step 5b: Write to Discovery Document
+
+Before asking the Step 5 question, write **Part 3: Prototypes** in `discovery-document.md` with a **Prototype Specifications** section: one line per PROTOTYPE-*.md (use case, type, file path). `Prototype Context Generation` stays the **Current Stage** until the user answers the Step 5 question.
+
 ## Step 6: Handle User Decision
+
+Once the user has answered, mark `Prototype Context Generation` as `[x]` in `aiplc-state.md`, then:
 
 ### If [A] - Build all 3 now:
 - Proceed to `prototype-building.md`
@@ -199,16 +205,13 @@ X) Other (please describe after [Answer]: tag below)
 
 ### If [B] - Stop here (handoff mode):
 - Confirm files are ready for sharing
-- Offer to continue to Product Strategy → GTM for one use case; if the user accepts, ask which one and record it as the selected use case in `aiplc-state.md`
-- Otherwise end the Discovery phase (mark remaining Discovery Document parts as not executed — see "Artifact Contract" in core-workflow.md)
+- Mark `Prototype Building` as `[-]` (handed off) in `aiplc-state.md`
+- Offer to continue to Product Strategy → GTM for one use case; if the user accepts, ask which one and record it under **Selected Use Case(s) for Strategy**
+- Otherwise end Discovery: run "End of Discovery" in Artifact Contract (core-workflow.md)
 
 ### If [C] - Build specific prototypes:
 - Ask which ones to build
 - Proceed to `prototype-building.md` for selected ones
-
-## Write to Discovery Document and State
-
-Write **Part 3: Prototypes** in `discovery-document.md` with a **Prototype Specifications** section: one line per PROTOTYPE-*.md (use case, type, file path). Mark `Prototype Context Generation` as `[x]` in `aiplc-state.md`.
 
 ## Additional Context Files
 

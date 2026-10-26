@@ -4,11 +4,13 @@
 
 Users may ask to change the Discovery workflow while it is running. This document provides guidance on handling these requests safely and effectively.
 
+State markers below refer to the Stage Progress block in core-workflow.md: pending = `[ ]`, skipped or not in this path = `[-]` with the reason, in progress = **Current Stage**.
+
 Discovery stage dependencies (later stages consume earlier artifacts):
 
 ```
 Envision (PR/FAQ) --> Solution Analysis --> Prototype & Validation (A.1)
-                                      \--> Use Case Prioritization (A.2)
+                                      \--> Use Case Intake (A.2, pre-filled)
 Use Case Intake --> Use Case Prioritization --> Prototype Context Generation --> Prototype Building
 Prototype & Validation / Prototype Building --> Product Strategy --> Go-to-Market
 ```
@@ -21,16 +23,17 @@ Prototype & Validation / Prototype Building --> Product Strategy --> Go-to-Marke
 
 **Scenario**: User wants to run a stage that was skipped
 
-**Example**: "Actually, I want to validate the prototype with users before doing product strategy"
+**Example**: "I handed off the PROTOTYPE files, but now I want to build one here after all"
 
 **Handling**:
-1. **Confirm Request**: "You want to add Prototype & Validation. This will create a validation plan and wait for user feedback. Confirm?"
+1. **Confirm Request**: "You want to add Prototype Building for {use case}. This will set up and run the prototype locally. Confirm?"
 2. **Check Dependencies**: Verify the stage's prerequisites exist
-3. **Update State**: Mark the stage as "PENDING" in `aiplc-state.md`
+3. **Update State**: Mark the stage as `[ ]` and set it as **Current Stage** in `aiplc-state.md`
 4. **Execute Stage**: Follow normal stage execution
 5. **Log Change**: Document in `audit.md` with timestamp and reason
 
 **Considerations**:
+- Only stages on the current path can be added (see each stage's prerequisites); to use another path's stages, see "Switching the Starting Path"
 - Later stages that already ran (for example Product Strategy) may need revision to reflect the new evidence
 
 ---
@@ -45,7 +48,7 @@ Prototype & Validation / Prototype Building --> Product Strategy --> Go-to-Marke
 1. **Confirm Request**: "You want to skip Go-to-Market. The Discovery Document will have no marketing, sales, or launch plan. Confirm?"
 2. **Warn About Impact**: Explain what will be missing for the developer handoff
 3. **Get Explicit Confirmation**: User must explicitly confirm
-4. **Update State**: Mark stage as "SKIPPED" with reason in `aiplc-state.md`
+4. **Update State**: Mark stage as `[-]` with reason in `aiplc-state.md`
 5. **Log Change**: Document in `audit.md` with timestamp and reason
 
 **Considerations**:
@@ -66,7 +69,7 @@ Prototype & Validation / Prototype Building --> Product Strategy --> Go-to-Marke
    - **Option B**: Complete restart (clean slate)
 3. **If Restart Chosen**:
    - Archive existing artifacts: `{artifact}.backup.{timestamp}`
-   - Mark stage as "IN PROGRESS" in `aiplc-state.md`
+   - Set the stage as **Current Stage** and mark it `[ ]` in `aiplc-state.md`
    - Re-execute from the beginning of the stage
 4. **Log Change**: Document reason for restart and what will change
 

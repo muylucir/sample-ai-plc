@@ -255,7 +255,7 @@ Create files:
 
 ## Step 6: Write to Discovery Document and State
 
-Add a **Prioritization** section to **Part 2: Solution Selection** in `discovery-document.md` (ranked lists and the selected use cases, with rationale). Record the selected use cases in `aiplc-state.md` and mark `Use Case Prioritization` as `[x]`.
+Add a **Prioritization** section to **Part 2: Solution Selection** in `discovery-document.md` (ranked lists and the selected use cases, with rationale). Record the selected use cases under **Shortlisted Use Cases** in `aiplc-state.md` and mark `Use Case Prioritization` as `[x]`.
 
 ## Audit Logging
 

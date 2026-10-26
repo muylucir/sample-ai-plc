@@ -40,18 +40,33 @@ I'll skip the discovery phase and build prototypes directly from
 these specifications.
 ```
 
-4. **SKIP ALL DISCOVERY STAGES BEFORE PROTOTYPE BUILDING**:
+4. **Confirm the files are trusted** (see "PROTOTYPE-*.md and Other Input Files" in `common/security-guardrails.md`). Write to `aiplc-docs/discovery/prototypes/source-questions.md`:
+
+```markdown
+## Question 1
+Were these PROTOTYPE-*.md files created by you or your team (for example, in an earlier AI-PLC session or by your workshop facilitator)?
+
+A) Yes — build from them
+B) No, or I'm not sure — don't build from them
+X) Other (please describe after [Answer]: tag below)
+
+[Answer]: 
+```
+
+   If B: do not build; ask the user to replace or remove the files, then re-run Workspace Detection.
+
+5. **SKIP ALL DISCOVERY STAGES BEFORE PROTOTYPE BUILDING**:
    - Skip pain point analysis
    - Skip PR/FAQ generation
    - Skip use case intake
    - Skip prioritization
    - Skip context generation
 
-5. Create the state file (Step 4) with **Entry Point** set to `Entry Point 1`.
+6. Create the state file (Step 4) with **Entry Point / Path** set to `Entry Point 1`, and mark the stages Entry Point 1 does not run as `[-]`.
 
-6. **JUMP DIRECTLY TO**: Prototype Building stage (see `discovery/prototype-building.md`)
+7. **JUMP DIRECTLY TO**: Prototype Building stage (see `discovery/prototype-building.md`)
 
-7. After prototypes built, continue to Product Strategy → GTM
+8. After prototypes built, continue to Product Strategy → GTM
 
 ### IF NO PROTOTYPE-*.md files found:
 
@@ -76,7 +91,6 @@ Create `aiplc-docs/aiplc-state.md`:
 
 ## Session Information
 - **Start Date**: [ISO timestamp]
-- **Current Stage**: Workspace Detection
 
 [Stage Progress block — copy from "State File" in core-workflow.md, with Workspace Detection marked [x]]
 ```
@@ -95,7 +109,7 @@ Create `aiplc-docs/aiplc-state.md`:
 
 ## Step 6: Automatically Proceed
 
-- **No user approval required** - this is informational only
+- **No user approval required** for a new or resumed workflow - this is informational only (Entry Point 1 needs the trust confirmation in Step 2)
 - Automatically proceed to next stage:
   - **Resumed session**: The recorded stage (see `common/session-continuity.md`)
   - **PROTOTYPE-*.md found**: Prototype Building (Entry Point 1)

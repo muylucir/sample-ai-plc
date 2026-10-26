@@ -23,53 +23,58 @@ AI-PLC Discovery is a structured yet flexible product definition process that he
 ## The Discovery Phase - Three Entry Points
 
 ```
-                    Product Manager Request
-                              |
-                              v
-                    Workspace Detection
-                              |
-                              v
-                  Check for PROTOTYPE-*.md files?
-                              |
-            ┌─────────────────┼─────────────────┐
-            |                 |                 |
-            v                 v                 v
-    Entry Point 1      Entry Point 2      Entry Point 3
-    Existing Files     Pain Points        Use Cases
-            |                 |                 |
-            |                 v                 v
-            |           Envision          Use Case Intake
-            |           (PR/FAQ)                |
-            |                 |                 v
-            |                 v           Prioritization
-            |          Solution Analysis       |
-            |                 |                 v
-            |        ┌────────┴────────┐  Context Generation
-            |        |                 |       |
-            |        v                 v       |
-            |   Single Solution   Multiple     |
-            |        |            Solutions    |
-            |        v                 |       |
-            |   Prototype &            └───────┘
-            |   Validation                 |
-            |        |                     v
-            └────────┴─────────────────────┘
-                              |
-                              v
-                    Prototype Building
-                         (Optional)
-                              |
-                              v
-                      Product Strategy
-                              |
-                              v
-                       Go-to-Market
-                              |
-                              v
-        ╔═══════════════════════════════════════╗
-        ║   DISCOVERY DOCUMENT COMPLETE         ║
-        ║   Ready for Developer Handoff         ║
-        ╚═══════════════════════════════════════╝
+                     Product Manager Request
+                                |
+                                v
+                      Workspace Detection
+                                |
+        +-----------------------+-----------------------+
+        |                       |                       |
+        v                       v                       v
+  Entry Point 1           Entry Point 2           Entry Point 3
+  Existing Files          Pain Points             Use Cases
+        |                       |                       |
+        |                       v                       |
+        |                   Envision                    |
+        |                   (PR/FAQ)                    |
+        |                       |                       |
+        |                       v                       |
+        |               Solution Analysis               |
+        |                 |           |                 |
+        |              single      multiple             |
+        |                 |           |                 |
+        |                 |           +-------+---------+
+        |                 |                   |
+        |                 |                   v
+        |                 |            Use Case Intake
+        |                 |                   |
+        |                 |                   v
+        |                 |            Prioritization
+        |                 |                   |
+        |                 |                   v
+        |                 |          Context Generation
+        |                 |           (PROTOTYPE-*.md)
+        |                 |                   |
+        |                 |                   v
+        +-----------------|---------> Prototype Building
+                          |          (or hand off files)
+                          v                   |
+                    Prototype &               |
+                    Validation                |
+                          |                   |
+                          +---------+---------+
+                                    |
+                                    v
+                            Product Strategy
+                                    |
+                                    v
+                              Go-to-Market
+                                    |
+                                    v
+                +---------------------------------------+
+                |   DISCOVERY DOCUMENT COMPLETE         |
+                |   Ready for Developer Handoff         |
+                +---------------------------------------+
 ```
 
 ### Discovery Phase Overview:

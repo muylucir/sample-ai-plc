@@ -24,7 +24,7 @@ X) Other (please describe after [Answer]: tag below)
 
 ## MANDATORY: Session Continuity Instructions
 1. **Always read aiplc-state.md first** when detecting existing project
-2. **Parse current status** from the state file to populate the prompt
+2. **Parse current status** from the state file to populate the prompt. Resume from **Current Stage**; if it is missing, use the first `[ ]` stage that belongs to the recorded path
 3. **MANDATORY: Load Previous Stage Artifacts** - Before resuming any stage, automatically read all relevant artifacts from previous stages that exist in the workspace:
    - **All stages**: `discovery/discovery-document.md` (parts completed so far)
    - **Envision**: `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode)

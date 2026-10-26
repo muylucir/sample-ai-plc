@@ -43,6 +43,12 @@ X) Other (please describe after [Answer]: tag below)
   3. Select top 3 for prototyping
   4. Generate PROTOTYPE-*.md files
 
+## State Update
+
+In `aiplc-state.md`, mark `Discovery Mode Selection` as `[x]`, then:
+- **Path A**: set **Entry Point / Path** to `Path A`; Solution Analysis decides between A.1 and A.2 and marks the remaining stages
+- **Path B**: set **Entry Point / Path** to `Path B`; mark `Envision`, `Solution Analysis`, and `Prototype & Validation` as `[-]` (not in this path)
+
 ## Audit Logging
 
 Log the user's choice:

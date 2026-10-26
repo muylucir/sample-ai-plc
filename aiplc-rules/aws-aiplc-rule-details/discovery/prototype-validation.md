@@ -10,7 +10,7 @@
 - User wants to validate with prototype
 
 **Note**: This is the ORIGINAL single-prototype flow. For multiple solutions or use case prioritization, see:
-- Path A.2: Multiple solutions → `solution-analysis.md` → `use-case-prioritization.md`
+- Path A.2: Multiple solutions → `solution-analysis.md` → `use-case-intake.md` (pre-filled) → `use-case-prioritization.md`
 - Path B: Use cases → `use-case-intake.md` → `use-case-prioritization.md`
 - Entry Point 1: Existing PROTOTYPE-*.md → `prototype-building.md`
 
@@ -245,6 +245,8 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 - Tests: happy path only — enough to verify core flows work
 ```
 
+**If the solution is agentic**, before building run these steps of `discovery/prototype-building.md` for it: Step 2.4 (provider and region), Step 2.5 (credentials), Step 2.5b (model ID), and the Strands environment detection in Step 2.7. Add the resulting provider, region, and model ID to `build-instructions.md`.
+
 **Instruct the AI agent to build the prototype from this file.**
 
 The AI agent reads `build-instructions.md` and generates the application code in the workspace with prototype-level quality constraints:
@@ -387,10 +389,9 @@ Validation plan set.
 - **Users**: [From Q2]
 - **Timeline**: [From Q3]
 
-When you have collected feedback, return and provide it. You can:
-- Paste feedback text directly
-- Provide a file path to import (.md, .docx, .csv)
-- Describe findings verbally
+When you have collected feedback, put it in `aiplc-docs/discovery/prototypes/{solution-slug}/validation-feedback.md` and tell me. You can:
+- Paste feedback text or interview notes into that file
+- Write the path of a file to import (.md, .docx, .csv) in that file
 
 I will synthesize everything against your original pain points.
 ```
@@ -504,7 +505,7 @@ X) Other (please describe after [Answer]: tag below)
 
 **If Iterate (B)**: Return to Step 4. Apply changes, re-validate.
 **If Pivot (C)**: Return to Envision stage with validation feedback as new input context.
-**If Kill (D)**: Log decision in audit.md, archive artifacts, end workflow.
+**If Kill (D)**: Log decision in audit.md, write Part 3 (Step 8) with the Kill decision and rationale, then run "End of Discovery" in Artifact Contract (core-workflow.md) and end the workflow.
 **If Proceed (A)**: Continue to Step 8.
 
 ### Step 8: Write to Living Document

@@ -101,9 +101,9 @@ Current defaults:
 
 Gather updates, then show updated configuration and ask for confirmation again.
 
-### Step 2.4: LLM Provider Selection (ALWAYS ASK for Agentic)
+### Step 2.4: LLM Provider and Region Selection (ALWAYS ASK for Agentic)
 
-If use case is Agentic and LLM provider not specified:
+If the use case is Agentic, always ask — even if the specification names a provider (show it as the suggested option A). A model ID written in a specification is a suggestion only: it may be retired or unavailable in the user's region, so it is checked in Step 2.5b like any other. Ignore `temperature`/sampling values in a specification for Claude models (see `common/llm-model-configuration.md`).
 
 ```
 Which LLM provider would you like to use for {Use Case Name}?
@@ -117,13 +117,7 @@ X) Other (please describe after [Answer]: tag below)
 [Answer]:
 ```
 
-Record selection.
-
-**IMPORTANT: Resolve the model ID with `common/llm-model-configuration.md`** — never from memory or from an example in another file:
-- **AWS Bedrock**: Ask for the AWS region, then resolve the inference profile ID that exists in that region (geographic prefix or `global.`)
-- **Anthropic**: Newest Claude Sonnet model, confirmed with the user
-- **Other providers**: Ask the user for the model ID
-- Do not set `temperature`, `top_p`, or `top_k` for Claude models
+Record selection. For AWS Bedrock, also ask for the AWS region. The model ID is resolved in Step 2.5b, after credentials are available.
 
 ### Step 2.5: API Key Check and Request
 
@@ -165,9 +159,11 @@ terminal window while the tool is running does not reach it. Choose the way that
 3. Start the AI tool again from that terminal and tell it you're done
 
 **Kiro, VS Code, Cursor, or another IDE:**
-1. Add the variables to your shell profile (macOS/Linux: `~/.zshrc` or `~/.bashrc`;
-   Windows: user environment variables, e.g. `setx NAME value` in PowerShell)
-2. Fully quit and reopen the IDE so the AI agent and its terminals load them
+1. Fully quit the IDE
+2. In a terminal, set the variables (commands below)
+3. Start the IDE from that same terminal (for example `kiro .`, `code .`, or `cursor .`)
+   so the AI agent and its terminals inherit them
+(Avoid saving long-lived keys in shell profile files — prefer an AWS CLI profile or short-term keys.)
 
 **Prefer not to put keys in your environment?** Run the prototype yourself: I will give you
 the command, and you start it in your own terminal where the variables are set.
@@ -247,7 +243,7 @@ X) Other (please describe after [Answer]: tag below)
 
 **CRITICAL**: Do NOT offer options to paste credentials into [Answer]: fields. Credentials must only be set via the terminal, the shell profile, or the provider's credential tooling. If a user accidentally pastes a credential in chat or an answer field, respond with: "I see you've shared a credential — please revoke it and generate a new one. Never share credentials in chat or answer files." Do NOT log the credential.
 
-After the user confirms A or B, verify from the AI tool's own shell by making a minimal API call with the model ID resolved in Step 2.4:
+After the user confirms A or B, resolve the model ID (Step 2.5b), then verify from the AI tool's own shell by making a minimal API call with it:
 ```
 ✅ {Provider} credentials and model verified and working
 ```
@@ -268,6 +264,16 @@ X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
+
+### Step 2.5b: Resolve the Model ID
+
+Resolve the model ID with `common/llm-model-configuration.md` — never from memory or from an example in another file — using the credentials confirmed in Step 2.5 (for an AWS CLI profile, pass `--profile <name>`):
+- **AWS Bedrock**: The inference profile ID that exists in the chosen region (geographic prefix or `global.`)
+- **Anthropic**: Newest Claude Sonnet model
+- **Other providers**: Ask the user for the model ID
+- If the user chose to run the prototype themselves (Step 2.5 option C), or listing fails, ask the user for the model ID as described in `common/llm-model-configuration.md`
+
+Show the resolved ID and let the user confirm it. Do not set `temperature`, `top_p`, or `top_k` for Claude models.
 
 ### Step 2.6: Final Configuration Confirmation
 
@@ -334,7 +340,7 @@ X) Other (please describe after [Answer]: tag below)
 ```
 
 - If [A] Mock: Build frontend with hardcoded mock responses simulating the agent. Skip Strands installation entirely. Mark prototype as "UI Prototype — Agent Mocked" in iteration log.
-- If [B] Ride: Create a virtual environment first (`python -m venv .venv && source .venv/bin/activate`), then install the current stable releases: `pip install strands-agents strands-agents-tools flask flask-cors`, and record the resolved versions with `pip freeze > requirements.txt`. Do NOT install to system Python. Proceed with full build.
+- If [B] Ride: Create a virtual environment first (`python -m venv .venv`), then install the current stable releases with the environment's own interpreter — `.venv/bin/python -m pip install strands-agents strands-agents-tools flask flask-cors` (Windows: `.venv\Scripts\python -m pip ...`) — and record the resolved versions with `.venv/bin/python -m pip freeze > requirements.txt`. Do not rely on `source .venv/bin/activate`: many hosts run each command in a fresh shell, so activation does not carry over. Do NOT install to system Python. Proceed with full build.
 
 ---
 
@@ -471,7 +477,7 @@ X) Other (please describe after [Answer]: tag below)
 
 ## Step 4: Selection and Next Steps
 
-1. Record the selected use case(s) in `aiplc-state.md` and mark `Prototype Building` as `[x]`
+1. Record the selected use case(s) under **Selected Use Case(s) for Strategy** in `aiplc-state.md` and mark `Prototype Building` as `[x]`
 2. In `discovery-document.md` (create it from the skeleton in "Artifact Contract", core-workflow.md, if it does not exist):
    - Add a **Build Results** section to **Part 3: Prototypes** — per prototype: URL, status, iteration count, key changes, and the selection
    - **Entry Point 1 only**: write Part 3's **Prototype Specifications** list too, and set Parts 1 and 2 to `_Not executed in this workspace — see the Use Case Overview in each PROTOTYPE-*.md_`; set **Entry Point / Path** to `Entry Point 1`

@@ -17,21 +17,21 @@ Single source of truth for choosing the LLM model, region, and request parameter
 Bedrock on-demand calls to Claude models use an **inference profile ID**, not the bare model ID. Profiles have a prefix that depends on the region: a geographic prefix (for example `us.`, `eu.`, `apac.`) or `global.`. A profile that exists in one region may not exist in another — for example, `us.` profiles are not available in `ap-northeast-2` (Seoul).
 
 1. **Region**: Use the region the user chose (ask if not set). Do not assume `us-west-2`.
-2. **If the AWS CLI is available and credentials are configured**, list what the region actually offers:
+2. **If the AWS CLI is available and credentials are configured** (resolve after the credential step in `discovery/prototype-building.md`), list what the region actually offers. Add `--profile <name>` when the user uses an AWS CLI profile:
 
 ```bash
 # Active Anthropic models in the region
-aws bedrock list-foundation-models --region <region> --by-provider Anthropic \
+aws bedrock list-foundation-models --region <region> [--profile <name>] --by-provider Anthropic \
   --query "modelSummaries[?modelLifecycle.status=='ACTIVE'].modelId" --output text
 
 # Inference profiles available in the region
-aws bedrock list-inference-profiles --region <region> --type-equals SYSTEM_DEFINED \
+aws bedrock list-inference-profiles --region <region> [--profile <name>] --type-equals SYSTEM_DEFINED \
   --query "inferenceProfileSummaries[?contains(inferenceProfileId, 'anthropic.claude-sonnet')].inferenceProfileId" --output text
 ```
 
    - Pick the highest-versioned **ACTIVE** Sonnet model (for example `sonnet-5-5` is newer than `sonnet-5`, which is newer than `sonnet-4-6`). Never pick a model whose lifecycle status is `LEGACY`.
    - Use the inference profile for that model with the region's geographic prefix if one is listed; otherwise use the `global.` profile and tell the user that global profiles can route requests to other geographies.
-3. **If the CLI is not available** (some IDEs, sandboxes, or hosts without AWS tooling): ask the user for the inference profile ID in a question file. Tell them where to find it: Amazon Bedrock console → the region they use → Cross-region inference (inference profiles). Show the examples below for the expected format.
+3. **If the CLI is not available** (some IDEs, sandboxes, or hosts without AWS tooling), the listing fails (for example, the credentials only work with a Bedrock API key, which these commands do not use, or the IAM policy does not allow listing), or the user runs the prototype themselves: ask the user for the inference profile ID in a question file. Tell them where to find it: Amazon Bedrock console → the region they use → Cross-region inference (inference profiles). Show the examples below for the expected format.
 4. Present the resolved ID with the other defaults and let the user confirm or change it.
 
 ### Example IDs (Last verified: 2026-10-26)
@@ -106,7 +106,13 @@ model = BedrockModel(
 ## Anthropic Direct
 
 ### Model ID
-Use the newest Claude Sonnet model listed at https://platform.claude.com/docs/en/about-claude/models/overview (example, last verified 2026-10-26: `claude-sonnet-5-5`). Confirm with the user.
+Use the newest Claude Sonnet model available to the user's API key. Find it without printing the key:
+
+```bash
+curl -s https://api.anthropic.com/v1/models -H "x-api-key: $ANTHROPIC_API_KEY" -H "anthropic-version: 2023-06-01"
+```
+
+If that is not possible, ask the user for the model ID and point them to https://platform.claude.com/docs/en/about-claude/models/overview (do not fetch it yourself unless the user asks — see `common/security-guardrails.md`). Example, last verified 2026-10-26: `claude-sonnet-5-5`. Confirm with the user.
 
 ### API Credentials
 ```bash

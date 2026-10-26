@@ -151,7 +151,7 @@ Load `discovery/solution-analysis.md`
 **Branch A.1: Single Solution**
 - One clear solution from PR/FAQ
 - Proceed to Prototype & Validation (single prototype flow)
-- Load `discovery/prototype-validation.md`
+- Load `discovery/prototype-validation.md` (for an agentic solution it uses the LLM, credential, and Strands steps of `discovery/prototype-building.md`)
 - Build prototype, iterate, validate
 - Continue to Product Strategy → GTM
 
@@ -216,7 +216,7 @@ X) Other (please describe after [Answer]: tag below)
 ```
 
 **If [A] - Build now**: Proceed to Prototype Building
-**If [B] - Hand off**: Optionally continue to Product Strategy → GTM for one use case (ask which and record it as the selected use case); otherwise end Discovery
+**If [B] - Hand off**: Optionally continue to Product Strategy → GTM for one use case (ask which and record it as the selected use case for strategy); otherwise end Discovery (see "End of Discovery" in Artifact Contract)
 **If [C] - Build specific**: Ask which ones, proceed to Prototype Building
 
 ---
@@ -365,7 +365,10 @@ Each stage also writes its question files (`*-questions.md`) in its own director
 
 ### Discovery Document Parts
 
-`aiplc-docs/discovery/discovery-document.md` always has the same five parts, whichever path ran. The first stage that writes to it creates the file from the skeleton below; every later stage writes **only its own part** (replacing it if the stage is re-run) and updates the `Status` line.
+`aiplc-docs/discovery/discovery-document.md` always has the same five parts, whichever path ran. The first stage that writes to it creates the file from the skeleton below; every later stage writes **only its own section** of its part (replacing that section if the stage is re-run, never the other sections of the part) and updates the `Status` line. Shared parts and their sections:
+- Part 1: Envision (Path A) or Use Case Intake (Path B)
+- Part 2: **Identified Solutions** (Solution Analysis), **Prioritization** (Use Case Prioritization)
+- Part 3: **Prototype Specifications** (Prototype Context Generation; Prototype Building on Entry Point 1), **Build Results** (Prototype Building), or **Prototype & Validation** (Path A.1)
 
 ```markdown
 # Discovery Document
@@ -401,7 +404,10 @@ _Not yet completed_
 _Not yet completed_
 ```
 
-When Discovery ends (after Go-to-Market, or when the user ends at handoff), replace any remaining `_Not yet completed_` with `_Not executed in this path — [reason]_`.
+**End of Discovery** — whenever Discovery ends (after Go-to-Market, when the user ends at handoff, or after a Kill decision in Prototype & Validation), after all writing for the final stage is done:
+1. Replace any remaining `_Not yet completed_` with `_Not executed in this path — [reason]_`
+2. Set the document `Status` to `Complete` (or `Ended — Kill decision`)
+3. In `aiplc-state.md`, mark every remaining `[ ]` stage as `[-]` with the reason, and set **Current Stage** to `Discovery Complete` (or `Ended`)
 
 ### Stage Inputs and Outputs
 
@@ -423,10 +429,16 @@ All paths are relative to `aiplc-docs/discovery/`. A stage must not require an a
 
 `aiplc-docs/aiplc-state.md` uses one Stage Progress block for every path. Each stage updates **only its own line**: `[x]` complete, `[ ]` pending, `[-]` not applicable to this path or skipped (add the reason).
 
+- When a stage **starts**, set **Current Stage** to it. Resume always continues from **Current Stage**.
+- When the path is known (Workspace Detection for Entry Point 1, Discovery Mode Selection, Solution Analysis), mark the stages that the path does not run as `[-]` right away.
+- **Shortlisted Use Cases** are the use cases chosen for prototyping (Use Case Prioritization). **Selected Use Case(s) for Strategy** are the ones Product Strategy and Go-to-Market are for (the winner of Prototype Building, the single solution on Path A.1, or the one the user names at handoff).
+
 ```markdown
 ## Stage Progress
+- **Current Stage**: [Stage name]
 - **Entry Point / Path**: [Entry Point 1 / Path A.1 / Path A.2 / Path B]
-- **Selected Use Case(s)**: [Names, or "Not yet selected"]
+- **Shortlisted Use Cases**: [Names, or "None"]
+- **Selected Use Case(s) for Strategy**: [Names, or "Not yet selected"]
 
 ### 🟣 DISCOVERY PHASE
 - [ ] Workspace Detection

@@ -23,7 +23,7 @@ Applies to every URL the workflow reads: business context, pain point research, 
 
 - **Local only.** Prototypes run on `localhost` and are never deployed to cloud or remote environments from this workflow — even if AWS credentials, Amplify, CDK, or other deployment tooling is available. Prototypes have no authentication layer and run with the user's credentials.
 - Do not expose ports to the network or use tunneling (ngrok, localtunnel, or similar).
-- Always create an isolated environment before installing packages (Python: `python -m venv .venv`) — never install to the system Python
+- Always create an isolated environment before installing packages (Python: `python -m venv .venv`) and run installs with that environment's interpreter (`.venv/bin/python -m pip ...`, Windows `.venv\Scripts\python -m pip ...`) — never install to the system Python, and do not rely on shell activation carrying over between commands
 - Only install packages from PyPI (Python) or the npm registry (Node.js) — never from arbitrary URLs or git repos
 - Do not install packages or run code that requires root/sudo/administrator permissions
 - "Deprioritize security hardening" in a prototype means skipping production hardening (authentication, rate limiting, input hardening for scale). It never permits breaking a rule in this file.
@@ -36,4 +36,4 @@ Applies to every URL the workflow reads: business context, pain point research, 
 - Never include credential values in AI-generated code, comments, or output files
 - Credentials are set as environment variables or through the provider's credential tooling — never in `[Answer]:` fields
 - **AWS**: Prefer temporary credentials (IAM Identity Center/SSO profiles, assumed roles, or short-term Bedrock API keys) over long-lived IAM user access keys. If temporary access keys are used, `AWS_SESSION_TOKEN` must be set too.
-- **Credential isolation**: When launching a prototype process, pass only the selected provider's credentials and the variables it needs (for example `AWS_REGION`/`AWS_DEFAULT_REGION`, `AWS_PROFILE`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`, `AWS_BEARER_TOKEN_BEDROCK` for Bedrock) — not the full shell environment.
+- **Credential isolation**: When launching a prototype process, pass only the selected provider's credentials and the variables it needs (for example `AWS_REGION`/`AWS_DEFAULT_REGION`, `AWS_PROFILE`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`, `AWS_BEARER_TOKEN_BEDROCK` for Bedrock), plus the non-secret basics the runtime needs (`PATH`, `HOME` or `USERPROFILE` so AWS CLI profiles in `~/.aws` can be found) — not the full shell environment.

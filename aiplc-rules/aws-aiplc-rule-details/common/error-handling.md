@@ -94,7 +94,7 @@
 ### Product Strategy and Go-to-Market Errors
 
 **Error**: No selected solution or use case
-- **Cause**: Handoff path chosen, or selection not recorded in `aiplc-state.md`
+- **Cause**: Handoff path chosen, or **Selected Use Case(s) for Strategy** not recorded in `aiplc-state.md` (the prototyping shortlist does not count)
 - **Solution**: Ask the user which solution or use case the strategy is for, then record it
 - **Do Not Proceed**: Until one is selected
 
@@ -150,7 +150,7 @@
 **Recovery Steps**:
 1. Confirm user understands implications
 2. Document skip reason in `audit.md`
-3. Mark stage as "SKIPPED" in `aiplc-state.md`
+3. Mark stage as `[-]` with the reason in `aiplc-state.md`
 4. Proceed to next stage
 5. Note: Later stages fall back to the inputs that exist (see each stage's prerequisites)
 
