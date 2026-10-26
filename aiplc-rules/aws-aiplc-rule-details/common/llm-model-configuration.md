@@ -70,6 +70,10 @@ export AWS_REGION=<region>
 ```
 - Copy short-term keys from your AWS access portal; avoid long-lived IAM user access keys
 
+**Option 4: Instance or container role**
+- On EC2, Cloud9, SageMaker, or a dev container with an attached role, the SDK finds credentials on its own — no variables or profile needed
+- Check with `aws sts get-caller-identity`; the role must allow invoking the model
+
 ### Python Code Example (Strands SDK)
 ```python
 from strands.models import BedrockModel
@@ -184,6 +188,6 @@ When building prototypes in the Discovery phase:
 2. **Check for API credentials** and request them upfront if missing (don't wait until build fails)
 3. **Resolve the model ID** for the provider and region using this file, with those credentials — never from memory
 4. **Verify credentials and the model ID work** with a minimal call before proceeding with the prototype build
-5. **Record** the provider, region, and model ID in the prototype's `iteration-log.md`
+5. **Record** the provider, region, and model ID as the first entry of the prototype's `iteration-log.md` (create it if it does not exist yet) — the same place on every path
 
 This ensures smooth prototype building without credential or model errors mid-process.

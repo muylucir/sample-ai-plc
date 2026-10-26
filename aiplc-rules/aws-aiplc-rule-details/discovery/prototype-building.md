@@ -103,7 +103,7 @@ Gather updates, then show updated configuration and ask for confirmation again.
 
 ### Step 2.4: LLM Provider and Region Selection (ALWAYS ASK for Agentic)
 
-If the use case is Agentic, always ask — even if the specification names a provider (show it as the suggested option A). A model ID written in a specification is a suggestion only: it may be retired or unavailable in the user's region, so it is checked in Step 2.5b like any other. Ignore `temperature`/sampling values in a specification for Claude models (see `common/llm-model-configuration.md`).
+If the use case is Agentic, or an Application that calls an LLM (for example AI extraction or summarization), always ask — even if the specification names a provider (show it as the suggested option A). A model ID written in a specification is a suggestion only: it may be retired or unavailable in the user's region, so it is checked in Step 2.5b like any other. Ignore `temperature`/sampling values in a specification for Claude models (see `common/llm-model-configuration.md`).
 
 ```
 Which LLM provider would you like to use for {Use Case Name}?
@@ -130,6 +130,7 @@ Based on selected LLM provider, check for API credentials and ask upfront if mis
 **For Bedrock** (any one of these is enough):
 - `AWS_BEARER_TOKEN_BEDROCK` exists (non-empty), or
 - An AWS CLI profile works: `aws sts get-caller-identity` (with `--profile <name>` if the user named one) succeeds — this prints the account and role ARN, never secrets, or
+- The default credential chain works without any of these variables — an instance or container role (for example on EC2, Cloud9, SageMaker, or a dev container): `aws sts get-caller-identity` succeeds with no profile, or
 - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` exist (and `AWS_SESSION_TOKEN` for temporary keys)
 - Plus a region: `AWS_REGION` / `AWS_DEFAULT_REGION`, the profile's region, or the region the user chose in Step 2.4
 

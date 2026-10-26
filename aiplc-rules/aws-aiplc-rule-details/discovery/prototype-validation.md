@@ -30,6 +30,8 @@ Write every question in this stage to `aiplc-docs/discovery/prototypes/{solution
 ## AI Behavior
 The AI acts as a prototype strategist — translating Envision artifacts into a buildable spec, guiding design decisions, structuring validation, and synthesizing feedback. The AI does NOT ask the PM to write code or make technical decisions. The PM makes product decisions; the AI handles everything else.
 
+**MANDATORY AUDIT**: Log to `aiplc-docs/audit.md` (see "Audit Logging" in core-workflow.md) at every gate in this stage and at each of these build events: build configuration confirmed; credentials checked (configured: yes/no — never values); model ID verified; build started; build finished (run command, test result); each iteration; validation feedback received; build decision. The build is the longest part of this stage — do not skip logging while building.
+
 ## Execution Steps
 
 ### Step 1: Generate Prototype Specification
@@ -245,7 +247,7 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 - Tests: happy path only — enough to verify core flows work
 ```
 
-**If the solution is agentic**, before building run these steps of `discovery/prototype-building.md` for it (write their questions to this stage's `prototype-questions.md`, not to `build-questions.md`): Step 2.4 (provider and region), Step 2.5 (credentials), Step 2.5b (model ID), and the Strands environment detection in Step 2.7. Add the resulting provider, region, and model ID to `build-instructions.md`.
+**If the solution calls an LLM** (agentic, or an application with AI features such as extraction or summarization), before building run these steps of `discovery/prototype-building.md` for it (write their questions to this stage's `prototype-questions.md`, not to `build-questions.md`): Step 2.4 (provider and region), Step 2.5 (credentials), Step 2.5b (model ID), and — for agentic solutions — the Strands environment detection in Step 2.7. Add the resulting provider, region, and model ID to `build-instructions.md`, and record them as the first entry of `iteration-log.md` (create it now, before the first iteration).
 
 **Instruct the AI agent to build the prototype from this file.**
 

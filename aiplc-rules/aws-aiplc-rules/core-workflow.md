@@ -314,7 +314,7 @@ This Discovery Document will be provided to developers in a separate workspace f
 - Capture user's COMPLETE RAW INPUT exactly as provided
 - Never summarize or paraphrase user input
 - Log every interaction with timestamp
-- Use ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ)
+- Use ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ). Get the current time from the shell for **each** entry (`date -u +%Y-%m-%dT%H:%M:%SZ`; PowerShell: `(Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")`). Never reuse an earlier timestamp or invent one; if the host cannot run a command, write `unknown`
 
 **NEVER log the following in audit.md** (see also `common/security-guardrails.md`)**:**
 - API keys, tokens, or secrets of any kind
