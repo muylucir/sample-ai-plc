@@ -232,9 +232,9 @@ Load `discovery/prototype-building.md`
 1. For each PROTOTYPE-*.md file:
    - Read specification
    - Show defaults, ask for LLM provider (ALWAYS ask)
-   - Check API credentials
+   - Check API credentials from the AI tool's own shell (credentials set after the tool started are not visible to it)
    - Request permission to build
-   - Activate Strands Power (if agentic)
+   - Set up Strands (if agentic): host integration such as Kiro's Strands Power when available, otherwise install or mock
    - Build prototype
    - Deploy locally
    - User validates and iterates

@@ -125,11 +125,15 @@ Record selection.
 
 **CREDENTIAL SECURITY RULE**: Follow "Credentials" in `common/security-guardrails.md`.
 
+**How hosts see credentials**: The AI tool, and every prototype it starts, can only see environment variables that were present when the AI tool itself was started (or, in IDEs, variables the IDE loads for new terminals from the user's shell profile). A variable the user `export`s in a separate terminal window afterwards is **not** visible to an AI tool that is already running — and the AI cannot set it for the user, because many hosts run each command in a fresh shell. Always run the checks below from the AI tool's own shell.
+
 Based on selected LLM provider, check for API credentials and ask upfront if missing:
 
-**For Bedrock:**
-- Check environment variables exist (non-empty): AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
-- Check AWS CLI configuration exists: ~/.aws/credentials
+**For Bedrock** (any one of these is enough):
+- `AWS_BEARER_TOKEN_BEDROCK` exists (non-empty), or
+- An AWS CLI profile works: `aws sts get-caller-identity` (with `--profile <name>` if the user named one) succeeds — this prints the account and role ARN, never secrets, or
+- `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` exist (and `AWS_SESSION_TOKEN` for temporary keys)
+- Plus a region: `AWS_REGION` / `AWS_DEFAULT_REGION`, the profile's region, or the region the user chose in Step 2.4
 
 **For Anthropic:**
 - Check environment variable exists (non-empty): ANTHROPIC_API_KEY
@@ -145,39 +149,48 @@ If credentials NOT found, present the following guidance:
 ```
 ## Setting Up Your API Credentials
 
-Your API credentials must be set as **environment variables** in your terminal. This keeps them secure and out of any logged files.
-
 ⚠️  **IMPORTANT: Do NOT paste your credentials into this chat or any [Answer]: field.**
-Set them in the terminal only. I will verify they are configured without seeing the actual values.
+I will verify they are configured without seeing the actual values.
 
-**What is an environment variable?** It's a setting in your computer's terminal that programs can read. You set it once per session, and any tool running in that terminal can use it.
+Your AI tool can only use credentials that exist **when the tool starts**. Setting them in another
+terminal window while the tool is running does not reach it. Choose the way that matches your tool:
 
-### How to Set Environment Variables
+**Claude Code or another terminal-based tool:**
+1. Exit the AI tool
+2. In the same terminal, set the variables (commands below)
+3. Start the AI tool again from that terminal and tell it you're done
 
-**Step 1:** Open a terminal window:
-- **VS Code / Cursor / Codex:** Use the built-in terminal (View → Terminal, or Ctrl+`)
-- **Kiro:** Use the built-in terminal panel (Terminal → New Terminal)
-- **Claude Code:** You're already in a terminal
-- **Any other tool:** Open your operating system's terminal application (macOS: Terminal or iTerm; Windows: PowerShell)
+**Kiro, VS Code, Cursor, or another IDE:**
+1. Add the variables to your shell profile (macOS/Linux: `~/.zshrc` or `~/.bashrc`;
+   Windows: user environment variables, e.g. `setx NAME value` in PowerShell)
+2. Fully quit and reopen the IDE so the AI agent and its terminals load them
 
-**Step 2:** Copy and paste the commands below into your terminal, replacing the placeholder values with your actual credentials:
+**Prefer not to put keys in your environment?** Run the prototype yourself: I will give you
+the command, and you start it in your own terminal where the variables are set.
 ```
 
 Then show the appropriate commands based on provider:
 
 **For Bedrock:**
 ```
-**macOS / Linux:**
-  export AWS_DEFAULT_REGION=your-region   # e.g. us-west-2, ap-northeast-2
-  export AWS_ACCESS_KEY_ID=paste-your-key-here
-  export AWS_SECRET_ACCESS_KEY=paste-your-secret-here
+**Recommended — AWS CLI profile with temporary credentials (no secrets in environment variables):**
+  aws configure sso            # one-time setup
+  aws sso login --profile your-profile
+  Then tell me the profile name (it is not a secret).
 
-**Windows (PowerShell):**
-  $env:AWS_DEFAULT_REGION="your-region"   # e.g. us-west-2, ap-northeast-2
-  $env:AWS_ACCESS_KEY_ID="paste-your-key-here"
-  $env:AWS_SECRET_ACCESS_KEY="paste-your-secret-here"
+**Or — Amazon Bedrock API key (short-term):**
+  macOS / Linux:        export AWS_BEARER_TOKEN_BEDROCK=paste-your-key-here
+  Windows (PowerShell): $env:AWS_BEARER_TOKEN_BEDROCK="paste-your-key-here"
+  Where to get this: Amazon Bedrock console → API keys
 
-Where to get these: prefer temporary credentials — for example `aws configure sso` then `aws sso login`, or copy short-term keys (including AWS_SESSION_TOKEN) from your AWS access portal. Avoid long-lived IAM user access keys.
+**Or — temporary access keys:**
+  macOS / Linux:
+    export AWS_DEFAULT_REGION=your-region   # e.g. us-west-2, ap-northeast-2
+    export AWS_ACCESS_KEY_ID=paste-your-key-here
+    export AWS_SECRET_ACCESS_KEY=paste-your-secret-here
+    export AWS_SESSION_TOKEN=paste-your-session-token-here
+  Windows (PowerShell): the same names with $env:NAME="value"
+  Where to get these: your AWS access portal (short-term credentials). Avoid long-lived IAM user access keys.
 ```
 
 **For Anthropic:**
@@ -216,34 +229,38 @@ Where to get this: https://aistudio.google.com/apikey
 Then present confirmation question:
 
 ```
-**Step 3:** Keep this terminal open — your AI tool must run in the same terminal session where you set the variables.
+Once your credentials are set, confirm below:
 
-Once you've set your credentials in the terminal, confirm below:
-
-[A] Done — I've set my credentials in the terminal
-[B] I need help — show me the steps again
-[C] I'm using AWS CLI profiles (already configured via `aws configure`)
-[D] Use a different LLM provider
+A) Done — I set them and restarted my AI tool (or IDE)
+B) I use an AWS CLI profile — profile name: ______
+C) I'll run the prototype myself in my own terminal
+D) I need help — show me the steps again
+E) Use a different LLM provider
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
 
-**CRITICAL**: Do NOT offer options to paste credentials into [Answer]: fields. Credentials must only be set via the terminal. If a user accidentally pastes a credential in chat or an answer field, respond with: "I see you've shared a credential — please revoke it and generate a new one. Always set credentials in your terminal, never in chat." Do NOT log the credential.
+**CRITICAL**: Do NOT offer options to paste credentials into [Answer]: fields. Credentials must only be set via the terminal, the shell profile, or the provider's credential tooling. If a user accidentally pastes a credential in chat or an answer field, respond with: "I see you've shared a credential — please revoke it and generate a new one. Never share credentials in chat or answer files." Do NOT log the credential.
 
-After user confirms [A] or [C], verify credentials work by making a minimal API call:
+After the user confirms A or B, verify from the AI tool's own shell by making a minimal API call with the model ID resolved in Step 2.4:
 ```
-✅ {Provider} credentials verified and working
+✅ {Provider} credentials and model verified and working
 ```
+
+If the user chose C, skip verification here: build the prototype, give the user the exact run command (including the project's virtual environment), and ask them to confirm it starts.
 
 If verification fails:
 ```
 ❌ {Provider} credentials verification failed
 
-This usually means the credentials weren't set in the same terminal session, or the values are incorrect.
+This usually means the credentials were set after the AI tool started (so it cannot see them),
+the values are incorrect or expired, or the model is not enabled for this account and region.
 
-Options:
-[A] I'll try setting them again in my terminal (show me the steps)
-[B] Use a different LLM provider
+A) I'll set them again (show me the steps)
+B) I'll run the prototype myself in my own terminal
+C) Use a different LLM provider
+X) Other (please describe after [Answer]: tag below)
 
 [Answer]:
 ```
@@ -264,7 +281,7 @@ Configuration:
 - Deployment: http://localhost:{port}
 
 This will:
-1. Activate Strands Power (if agentic)
+1. Set up Strands (if agentic) — host integration if available, otherwise install or mock (Step 2.7)
 2. Build the {agent/application} with specified {tools/features}
 3. Create the frontend matching {brand}
 4. Deploy locally for testing
@@ -285,13 +302,14 @@ If [A] - Yes:
 
 Before building, detect the environment and configure Strands accordingly:
 
-**Detection Logic:**
-1. Check if `.kiro/` directory exists → **Kiro environment**
-2. Otherwise → **All other environments** (Claude Code, Copilot, Cursor, Cline, etc.)
+**Detection Logic** (detect the capability, not the directory):
+1. Check whether this host provides a Strands integration you can use right now — for example, Kiro with the Strands Power installed (it appears among the Powers/tools available to you in this session) → **Path 1**
+2. Otherwise → **Path 2** (Claude Code, Copilot, Cursor, Cline, Kiro without the Strands Power, etc.)
 
-**Path 1 — Kiro:**
-- Activate Strands Power (built-in Kiro Power integration)
-- No additional setup needed
+Do not decide by the `.kiro/` directory alone: every Kiro workspace set up with these rules has it, whether or not the Power is installed, and a repository containing it may be opened with another tool.
+
+**Path 1 — Host Strands integration:**
+- Use the host's Strands integration
 - Proceed with building
 
 **PROTOTYPE ENVIRONMENT RULES** (all paths, including Kiro): Follow "Running Prototypes" in `common/security-guardrails.md`. In addition, install the current stable release of each package (do not copy version numbers from these rules — they go stale), then record the exact resolved versions with `pip freeze > requirements.txt` so the prototype can be reproduced.

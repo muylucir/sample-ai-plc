@@ -45,23 +45,30 @@ Examples only — always resolve the current ID with the steps above.
 
 ### API Credentials
 
-**Option 1: Bearer Token (Development - Recommended)**
+Credentials must be visible to the AI tool's process when it starts — see Step 2.5 of `discovery/prototype-building.md`. Prefer temporary credentials (see `common/security-guardrails.md`).
+
+**Option 1: AWS CLI profile with temporary credentials (Recommended)**
+```bash
+aws configure sso
+aws sso login --profile your-profile
+```
+- Works without putting secrets in environment variables; pass the profile name to the prototype (`AWS_PROFILE`, or `boto3.Session(profile_name=...)`)
+- Check with `aws sts get-caller-identity --profile your-profile`
+
+**Option 2: Amazon Bedrock API key (short-term)**
 ```bash
 export AWS_BEARER_TOKEN_BEDROCK=bedrock-api-key-...
 ```
-- Best for development and testing
-- Expires in 30 days
-- Get from: AWS Bedrock Console → API keys
+- Get from: Amazon Bedrock console → API keys
 
-**Option 2: AWS Credentials (Production)**
+**Option 3: Temporary access keys**
 ```bash
 export AWS_ACCESS_KEY_ID=your_access_key
 export AWS_SECRET_ACCESS_KEY=your_secret_key
+export AWS_SESSION_TOKEN=your_session_token
 export AWS_REGION=<region>
 ```
-- Best for production deployments
-- Use IAM roles or temporary credentials
-- Configure via `aws configure` or environment variables
+- Copy short-term keys from your AWS access portal; avoid long-lived IAM user access keys
 
 ### Python Code Example (Strands SDK)
 ```python
@@ -159,7 +166,7 @@ model = LlamaAPIModel(
 
 | Provider | Model ID | Environment Variable | Get Key From |
 |----------|----------|---------------------|--------------|
-| AWS Bedrock | Resolved per region at build time (see above) | `AWS_BEARER_TOKEN_BEDROCK` or `AWS_ACCESS_KEY_ID` + `AWS_SECRET_ACCESS_KEY` | AWS Bedrock Console |
+| AWS Bedrock | Resolved per region at build time (see above) | `AWS_PROFILE` (SSO), `AWS_BEARER_TOKEN_BEDROCK`, or `AWS_ACCESS_KEY_ID` + `AWS_SECRET_ACCESS_KEY` + `AWS_SESSION_TOKEN` | AWS access portal / Bedrock console |
 | Anthropic | Newest Claude Sonnet, confirmed with the user | `ANTHROPIC_API_KEY` | console.anthropic.com |
 | OpenAI / Gemini / Llama | Asked from the user | See table above | See table above |
 
