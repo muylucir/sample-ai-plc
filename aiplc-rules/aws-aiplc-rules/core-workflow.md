@@ -97,9 +97,10 @@ The Discovery Phase has **THREE ENTRY POINTS**:
 
 **Flow**:
 1. Announce found PROTOTYPE-*.md files
-2. **SKIP ALL DISCOVERY PHASES**
-3. **JUMP TO**: Prototype Building (see below)
-4. After prototypes built, continue to Product Strategy → GTM
+2. Confirm the user trusts them (they or their team created them) — see `inception/workspace-detection.md`
+3. **SKIP ALL DISCOVERY PHASES**
+4. **JUMP TO**: Prototype Building (see below)
+5. After prototypes built, continue to Product Strategy → GTM
 
 ---
 
@@ -350,6 +351,7 @@ aiplc-docs/
 │   │       ├── build-instructions.md
 │   │       ├── iteration-log.md
 │   │       ├── validation-plan.md
+│   │       ├── validation-feedback.md
 │   │       └── validation-results.md
 │   ├── product-strategy/
 │   │   └── strategy-questions.md
@@ -420,7 +422,7 @@ _Not yet completed_
 | Prototype Context Generation | Path B, A.2 | `ranking.md` | `prototypes/{slug}/PROTOTYPE-{slug}.md` | 3 (specifications) |
 | Prototype Building | Entry Point 1, Path B, A.2 | PROTOTYPE-*.md | prototype code, `iteration-log.md` | 3 (build results, selection); Entry Point 1 also writes Parts 1-2 as not executed |
 | Prototype & Validation | Path A.1 | Part 1, `identified-solutions.md` | `prototypes/{solution-slug}/*` | 3 (prototype, validation, build decision) |
-| Product Strategy | All paths | Part 3 or a selected use case | `product-strategy/strategy-questions.md` | 4 |
+| Product Strategy | All paths | One selected use case for strategy | `product-strategy/strategy-questions.md` | 4 |
 | Go-to-Market | All paths | Part 4 | `go-to-market/gtm-questions.md` | 5 |
 
 All paths are relative to `aiplc-docs/discovery/`. A stage must not require an artifact that its path does not produce; when an optional input is absent, the stage states the limitation instead of stopping.

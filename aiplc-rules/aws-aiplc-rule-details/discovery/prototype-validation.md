@@ -245,7 +245,7 @@ This file combines the prototype spec (Step 1) and design context (Step 2) into 
 - Tests: happy path only — enough to verify core flows work
 ```
 
-**If the solution is agentic**, before building run these steps of `discovery/prototype-building.md` for it: Step 2.4 (provider and region), Step 2.5 (credentials), Step 2.5b (model ID), and the Strands environment detection in Step 2.7. Add the resulting provider, region, and model ID to `build-instructions.md`.
+**If the solution is agentic**, before building run these steps of `discovery/prototype-building.md` for it (write their questions to this stage's `prototype-questions.md`, not to `build-questions.md`): Step 2.4 (provider and region), Step 2.5 (credentials), Step 2.5b (model ID), and the Strands environment detection in Step 2.7. Add the resulting provider, region, and model ID to `build-instructions.md`.
 
 **Instruct the AI agent to build the prototype from this file.**
 

@@ -99,7 +99,7 @@ AI-PLC Discovery is a structured yet flexible product definition process that he
 
 **Typical scenario**: Workshop where facilitator distributed PROTOTYPE-*.md files to teams
 
-**Example**: You receive `PROTOTYPE-customer-support-agent.md` → workflow builds it immediately
+**Example**: You receive `PROTOTYPE-customer-support-agent.md` → you confirm it comes from your team → workflow builds it
 
 ---
 

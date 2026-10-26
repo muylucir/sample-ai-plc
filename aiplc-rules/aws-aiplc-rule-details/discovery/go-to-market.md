@@ -114,7 +114,7 @@ Write **Part 5: Go-to-Market** in `aiplc-docs/discovery/discovery-document.md`:
 - **Kill Criteria**: [Conditions to pivot or stop]
 ```
 
-Update the document status header to `**Status**: Complete`, and replace any part still marked `_Not yet completed_` with `_Not executed in this path — [reason]_`.
+Update the document status header to `**Status**: In Progress — Go-to-Market`.
 
 ### Step 4: Present Discovery Phase Completion
 
@@ -151,7 +151,7 @@ DO NOT mark Discovery complete until the user explicitly approves the complete D
 
 ### Step 5: Update State Tracking
 
-In `aiplc-docs/aiplc-state.md`, mark `Go-to-Market` as `[x]` and every stage that did not run in this path as `[-]`.
+After approval, mark `Go-to-Market` as `[x]` in `aiplc-docs/aiplc-state.md`, then run "End of Discovery" in Artifact Contract (core-workflow.md): it marks the document `Complete`, marks unexecuted parts and stages, and sets **Current Stage** to `Discovery Complete`.
 
 ### Step 6: Log and End
 

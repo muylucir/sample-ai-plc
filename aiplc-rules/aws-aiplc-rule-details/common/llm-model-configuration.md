@@ -180,11 +180,10 @@ model = LlamaAPIModel(
 
 When building prototypes in the Discovery phase:
 
-1. **Always ask for LLM provider** (even if default is Bedrock)
-2. **Resolve the model ID** for the provider (and region, for Bedrock) using this file — never from memory
-3. **Check for API credentials** before building
-4. **Request credentials upfront** if missing (don't wait until build fails)
-5. **Verify credentials and the model ID work** with a minimal call before proceeding with the prototype build
-6. **Record** the provider, region, and model ID in the prototype's `iteration-log.md`
+1. **Always ask for LLM provider** (even if default is Bedrock), and the region for Bedrock
+2. **Check for API credentials** and request them upfront if missing (don't wait until build fails)
+3. **Resolve the model ID** for the provider and region using this file, with those credentials — never from memory
+4. **Verify credentials and the model ID work** with a minimal call before proceeding with the prototype build
+5. **Record** the provider, region, and model ID in the prototype's `iteration-log.md`
 
 This ensures smooth prototype building without credential or model errors mid-process.

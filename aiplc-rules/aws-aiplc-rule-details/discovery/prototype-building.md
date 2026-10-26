@@ -64,7 +64,7 @@ FROM SPECIFICATION:
 
 DEFAULTS FOR MISSING ITEMS:
 🔧 LLM Provider: [Not specified - need your input] (if agentic and not specified)
-🔧 LLM Model: Newest active Claude Sonnet (default — exact ID resolved in Step 2.4)
+🔧 LLM Model: Newest active Claude Sonnet (default — exact ID resolved in Step 2.5b)
 🔧 Port: {3000 + X} (default, incremented for each prototype)
 🔧 Tools: {placeholder tools} (if not specified)
 🔧 Brand: Generic modern design (if not specified)
@@ -241,7 +241,7 @@ X) Other (please describe after [Answer]: tag below)
 [Answer]:
 ```
 
-**CRITICAL**: Do NOT offer options to paste credentials into [Answer]: fields. Credentials must only be set via the terminal, the shell profile, or the provider's credential tooling. If a user accidentally pastes a credential in chat or an answer field, respond with: "I see you've shared a credential — please revoke it and generate a new one. Never share credentials in chat or answer files." Do NOT log the credential.
+**CRITICAL**: Do NOT offer options to paste credentials into [Answer]: fields. Credentials must only be set in the terminal the AI tool (or IDE) is started from, or through the provider's credential tooling (for example an AWS CLI profile). If a user accidentally pastes a credential in chat or an answer field, respond with: "I see you've shared a credential — please revoke it and generate a new one. Never share credentials in chat or answer files." Do NOT log the credential.
 
 After the user confirms A or B, resolve the model ID (Step 2.5b), then verify from the AI tool's own shell by making a minimal API call with it:
 ```
@@ -323,7 +323,7 @@ Do not decide by the `.kiro/` directory alone: every Kiro workspace set up with 
 - Use the host's Strands integration
 - Proceed with building
 
-**PROTOTYPE ENVIRONMENT RULES** (all paths, including Kiro): Follow "Running Prototypes" in `common/security-guardrails.md`. In addition, install the current stable release of each package (do not copy version numbers from these rules — they go stale), then record the exact resolved versions with `pip freeze > requirements.txt` so the prototype can be reproduced.
+**PROTOTYPE ENVIRONMENT RULES** (all paths, including Kiro): Follow "Running Prototypes" in `common/security-guardrails.md`. In addition, install the current stable release of each package (do not copy version numbers from these rules — they go stale), then record the exact resolved versions with the environment's interpreter (`.venv/bin/python -m pip freeze > requirements.txt`, Windows `.venv\Scripts\python -m pip freeze > requirements.txt`) so the prototype can be reproduced.
 
 **Path 2 — All other environments:**
 - Present the following question:

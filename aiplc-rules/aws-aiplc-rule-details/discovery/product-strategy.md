@@ -8,7 +8,7 @@
 
 ## Prerequisites
 - `aiplc-docs/discovery/discovery-document.md` must exist (create it from the skeleton in "Artifact Contract", core-workflow.md, if it does not)
-- A use case recorded under **Selected Use Case(s) for Strategy** in `aiplc-state.md`. (**Shortlisted Use Cases** do not count — they are the prototyping shortlist.) If none is recorded, ask which one this strategy is for and record it before continuing. If more than one is recorded, ask which to start with; run Product Strategy → Go-to-Market once per use case
+- A use case recorded under **Selected Use Case(s) for Strategy** in `aiplc-state.md`. (**Shortlisted Use Cases** do not count — they are the prototyping shortlist.) If none is recorded, ask which one this strategy is for and record it before continuing. A Discovery Document holds one strategy. If more than one is recorded, ask which one to use; list the others in Part 3 under **Strategy Candidates Not Covered** so they can be taken through Product Strategy → Go-to-Market in a separate workspace (copy the `prototypes/{slug}/` folder there — it starts at Entry Point 1)
 
 Envision is **not** required — Path B and Entry Point 1 reach this stage without it.
 

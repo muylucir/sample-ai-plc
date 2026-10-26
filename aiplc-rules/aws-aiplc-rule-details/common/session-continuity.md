@@ -17,6 +17,7 @@ Based on your aiplc-state.md, here's your current status:
 
 A) Continue where you left off ([Next step description])
 B) Review a previous stage ([Show available stages])
+C) Reopen a stage that was skipped or not executed ([Show those stages]) — only if Discovery has ended
 X) Other (please describe after [Answer]: tag below)
 
 [Answer]: 
@@ -24,7 +25,7 @@ X) Other (please describe after [Answer]: tag below)
 
 ## MANDATORY: Session Continuity Instructions
 1. **Always read aiplc-state.md first** when detecting existing project
-2. **Parse current status** from the state file to populate the prompt. Resume from **Current Stage**; if it is missing, use the first `[ ]` stage that belongs to the recorded path
+2. **Parse current status** from the state file to populate the prompt. Resume from **Current Stage**; if it is missing, use the first `[ ]` stage that belongs to the recorded path. If **Current Stage** is `Discovery Complete` or `Ended`, there is nothing to continue: offer review, or reopening a `[-]` stage (option C) through "Adding a Skipped Stage" in `common/workflow-changes.md`
 3. **MANDATORY: Load Previous Stage Artifacts** - Before resuming any stage, automatically read all relevant artifacts from previous stages that exist in the workspace:
    - **All stages**: `discovery/discovery-document.md` (parts completed so far)
    - **Envision**: `discovery/envision/pain-point-analysis.md`, `discovery/envision/pain-points-from-url.md` (if URL mode)
@@ -32,7 +33,7 @@ X) Other (please describe after [Answer]: tag below)
    - **Use Case Intake**: `discovery/use-case-intake/use-cases.md`
    - **Use Case Prioritization**: `discovery/prioritization/scoring.md`, `discovery/prioritization/ranking.md`
    - **Prototype Context Generation / Prototype Building**: `discovery/prototypes/*/PROTOTYPE-*.md`, `design-context.md`, `iteration-log.md`
-   - **Prototype & Validation**: `discovery/prototypes/{solution-slug}/prototype-spec.md`, `design-context.md`, `build-instructions.md`, `iteration-log.md`, `validation-plan.md`, `validation-results.md`
+   - **Prototype & Validation**: `discovery/prototypes/{solution-slug}/prototype-spec.md`, `design-context.md`, `build-instructions.md`, `iteration-log.md`, `validation-plan.md`, `validation-feedback.md`, `validation-results.md`
    - **Product Strategy**: `discovery/product-strategy/strategy-questions.md`
    - **Go-to-Market**: `discovery/go-to-market/gtm-questions.md`
    - All paths above are relative to `aiplc-docs/`

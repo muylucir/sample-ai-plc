@@ -32,6 +32,8 @@ Prototype & Validation / Prototype Building --> Product Strategy --> Go-to-Marke
 4. **Execute Stage**: Follow normal stage execution
 5. **Log Change**: Document in `audit.md` with timestamp and reason
 
+**If Discovery had already ended**: set the document `Status` back to `In Progress — [stage]` and replace that stage's `_Not executed in this path — ..._` part or section with `_Not yet completed_` before running it; run "End of Discovery" (core-workflow.md) again when finished.
+
 **Considerations**:
 - Only stages on the current path can be added (see each stage's prerequisites); to use another path's stages, see "Switching the Starting Path"
 - Later stages that already ran (for example Product Strategy) may need revision to reflect the new evidence
