@@ -1,7 +1,7 @@
 # LLM Model Configuration Guide
 
 ## Purpose
-Single source of truth for choosing the LLM model, region, and request parameters for agentic prototypes. Other rule files refer to this file instead of naming model IDs themselves.
+Single source of truth for choosing the LLM model, region, and request parameters for prototypes that call an LLM (agentic, or an application with AI features). Other rule files refer to this file instead of naming model IDs themselves.
 
 ## Principles
 

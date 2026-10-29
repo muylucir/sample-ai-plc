@@ -156,7 +156,7 @@ Load `discovery/solution-analysis.md`
 **Branch A.1: Single Solution**
 - One clear solution from PR/FAQ
 - Proceed to Prototype & Validation (single prototype flow)
-- Load `discovery/prototype-validation.md` (for an agentic solution it uses the LLM, credential, and Strands steps of `discovery/prototype-building.md`)
+- Load `discovery/prototype-validation.md` (for a solution that calls an LLM it uses the LLM and credential steps of `discovery/prototype-building.md`, plus the Strands steps if it is agentic)
 - Build prototype, iterate, validate
 - Continue to Product Strategy → GTM
 
