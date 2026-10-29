@@ -63,7 +63,7 @@ FROM SPECIFICATION:
 ✅ Frontend: {description} (if specified)
 
 DEFAULTS FOR MISSING ITEMS:
-🔧 LLM Provider: [Not specified - need your input] (if agentic and not specified)
+🔧 LLM Provider: [Not specified - need your input] (if it calls an LLM and not specified)
 🔧 LLM Model: Newest active Claude Sonnet (default — exact ID resolved in Step 2.5b)
 🔧 Port: {3000 + X} (default, incremented for each prototype)
 🔧 Tools: {placeholder tools} (if not specified)
@@ -101,7 +101,7 @@ Current defaults:
 
 Gather updates, then show updated configuration and ask for confirmation again.
 
-### Step 2.4: LLM Provider and Region Selection (ALWAYS ASK for Agentic)
+### Step 2.4: LLM Provider and Region Selection (ALWAYS ASK if the prototype calls an LLM)
 
 If the use case is Agentic, or an Application that calls an LLM (for example AI extraction or summarization), always ask — even if the specification names a provider (show it as the suggested option A). A model ID written in a specification is a suggestion only: it may be retired or unavailable in the user's region, so it is checked in Step 2.5b like any other. Ignore `temperature`/sampling values in a specification for Claude models (see `common/llm-model-configuration.md`).
 
@@ -283,8 +283,8 @@ Ready to build the {Use Case Name} prototype with:
 
 Configuration:
 - Type: {Agentic/Application}
-- LLM Provider: {provider} (if agentic)
-- LLM Model: {model} (if agentic)
+- LLM Provider: {provider} (if it calls an LLM)
+- LLM Model: {model} (if it calls an LLM)
 - Tools: {tool1, tool2}
 - Brand: {URL or description}
 - Device: {Mobile/Desktop/Both}
